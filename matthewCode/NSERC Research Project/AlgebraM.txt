@@ -1,0 +1,42 @@
+-- Algebra M:
+-- Source: page 27, zhangzhang
+-- Date: August 11, 2020
+
+-- f does not equal 1
+
+-- Relations:
+
+P = Q = (-1, 0)
+
+xw + wx = 0
+zy + yz = 0
+
+yw - xy - wz = 0
+yx - f*wy + xz = 0
+zw - wy + xz = 0
+zx + xy + f*wz = 0
+
+-- Ideal:
+
+ideal(xw + wx, zy + yz, yw - xy - wz, yx - f*wy + xz, zw - wy + xz, zx + xy + f*wz)
+
+-- Results (f = 10):
+
+degree: 12
+dimension: 2
+
+radical: true
+
+DegreePrimaryDecomposition (radical): {2, 2, 8}
+DimPrimaryDecomposition (radical): {2, 2, 2}
+#primaryDecompositon: 3
+
+apply(pd, x->(dim singularLocus(x))) -- Loading Error; try again later
+
+dim(pd_0 + pd_1)    0
+dim(pd_0 + pd_2)    1
+dim(pd_1 + pd_2)
+
+degree(pd_0 + pd_1) 1
+degree(pd_0 + pd_2) 2
+degree(pd_1 + pd_2)

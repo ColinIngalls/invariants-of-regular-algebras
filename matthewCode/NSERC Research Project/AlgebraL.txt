@@ -1,0 +1,41 @@
+-- Algebra L:
+-- Source: page 27, zhangzhang
+-- Date: August 11, 2020
+
+-- q = 1 or -1, f does not equal 0
+
+-- Relations:
+
+P = (-1, 0), Q = (q, 0)
+
+xw - q*wx = 0
+zy + yz = 0
+
+yw - f*wz = 0
+yx - xz = 0
+zw - f*wy = 0
+zx - xy = 0
+
+-- Ideal:
+
+ideal(xw - q*wx, zy + yz, yw - f*wz, yx - xz, zw - f*wy, zx - xy)
+
+-- Results (q = -1, f = 5/3):
+
+degree: 12
+dimension: 2
+
+radical: true
+
+DegreePrimaryDecomposition (radical): {4, 2, 4, 2} -- determine the genus of the four-degree curves
+DimPrimaryDecomposition (radical): {2, 2, 2, 2}
+#primaryDecompositon: 4
+
+apply(pd, x->(dim singularLocus(x))) {1, 0, 1, 0} -- singular points in the four-degree curves
+apply(pd, x->(degree singularLocus(x))) {1, 1, 1, 1}
+apply(pd, x->(degree radical ideal singularLocus(x))) {1, 1, 1, 1}
+
+-- take primaryDecomposition of singularLocus 
+
+degree primaryDecomposition singularLocus: -- experienced loading issue; try again
+dimension primaryDecomposition singularLocus: -- experienced loading issue; try again
