@@ -1,0 +1,41 @@
+-- Algebra B
+-- Source: Page 24, zhangzhang
+-- Date: August 3, 2020
+
+k = ZZ/101
+p = 10
+
+-- Relations:
+
+P = Q = (p, 0), p^2 = -1
+
+xw - p*wx = 0
+zy - p*yz = 0
+
+yw - xz = 0
+yx - wz = 0
+zw + xy = 0
+zx - wy = 0
+
+-- Ideal:
+
+ideal(xw - p*wx, zy - p*yz, yw - xz, yx - wz, zw + xy, zx - wy)
+
+-- Results:
+
+degree: 4
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 4, 4, 4, 4}
+DimPrimaryDecomposition: {2, 2, 1, 1, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 2} -- Two Conics; check for intersection
+DimPrimaryDecomposition (radical): {2, 2}
+#primaryDecompositon (radical): 2
+
+dim(pd_0 + pd_1)    0 -- No intersection
+degree(pd_0 + pd_1) 1
+
+apply(pd, x->(dim singularLocus(x))) {0, 0}

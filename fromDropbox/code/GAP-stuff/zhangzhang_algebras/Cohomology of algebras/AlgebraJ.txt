@@ -1,0 +1,37 @@
+-- Algebra J:
+-- Source: page 27, zhangzhang
+-- Date: August 8, 2020
+
+-- k = ZZ/101, q = 10
+
+-- Relations:
+
+P = (-1, 0), Q = (q, 0)
+
+xw - q*wx = 0
+zy + yz = 0
+
+yw - xy - xz = 0
+yx + wy - xy = 0
+zw - xy + xz = 0
+zx - wy - xy = 0
+
+-- Ideal:
+
+ideal(xw - q*wx, zy + yz, yw - xy - xz, yx + wy - xy, zw - xy + xz, zx - wy - xy)
+
+-- Results:
+
+degree: 8
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {1, 2, 1, 2, 2, 6, 2, 2}
+DimPrimaryDecomposition: {2, 2, 2, 2, 2, 1, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 1, 2, 1, 2}
+DimPrimaryDecomposition (radical): {2, 2, 2, 2, 2}
+#primaryDecompositon: 5
+
+apply(pd, x->(dim singularLocus(x))) {0, -1, 0, -1, 0}

@@ -1,0 +1,20 @@
+-- Algebra B
+-- Source: Page 24, zhangzhang
+-- Date: August 3, 2020
+
+k = ZZ/101
+p = 10
+
+-- Relations:
+
+P = Q = (p, 0), p^2 = -1
+
+xw - p*wx = 0
+zy - p*yz = 0
+
+yw - xz = 0
+yx - wz = 0
+zw + xy = 0
+zx - wy = 0
+
+-- Koszul Cohomology:

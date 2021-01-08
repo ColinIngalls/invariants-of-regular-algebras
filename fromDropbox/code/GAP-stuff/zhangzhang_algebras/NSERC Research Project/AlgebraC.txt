@@ -1,0 +1,59 @@
+-- Algebra C
+-- Source: Page 38, zhangzhang.txt
+-- Date: July 9, 2020
+
+-- k = ZZ/601
+-- p = 24
+
+-- Relations:
+
+zy - p*yz = 0
+xw - p*wx = 0
+yw + wy - (p^2)*xy - wz + p*xz = 0
+yx + p*wy - xy - wz + p*xz = 0
+zw + p*wy + 2*(p^2)*xy - p*wz + p*xz = 0
+zx + p*wy - (p^2)*xy - wz + xz = 0
+
+-- Ideal:
+
+ideal(zy-p*yz, xw-p*wx, yw+wy-(p^2)*xy-wz+p*xz, yx+p*wy-xy-wz+p*xz, zw+p*wy+2*(p^2)*xy-p*wz+p*xz, zx+p*wy-(p^2)*xy-wz+xz)
+
+-- Results: 
+
+degree: 10
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 2, 2, 2, 2, 4}
+DimPrimaryDecomposition: {2, 2, 2, 2, 2, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 2, 2, 2, 2}
+DimPrimaryDecomposition (radical): {2, 2, 2, 2, 2}
+#primaryDecompositon (radical): 5
+
+dimension SingularLocus: 
+
+dim(pd_0 + pd_1)    0
+dim(pd_0 + pd_2)    1
+dim(pd_0 + pd_3)    1 -- Graph how the conics are connected (conics in 3D space, edge if 1, nothing if 0)
+dim(pd_0 + pd_4)    1
+dim(pd_1 + pd_2)    1
+dim(pd_1 + pd_3)    1
+dim(pd_1 + pd_4)    1
+dim(pd_2 + pd_3)    0
+dim(pd_2 + pd_4)    0
+dim(pd_3 + pd_4)    0
+
+degree(pd_0 + pd_1) 1
+degree(pd_0 + pd_2) 1
+degree(pd_0 + pd_3) 1
+degree(pd_0 + pd_4) 1
+degree(pd_1 + pd_2) 1
+degree(pd_1 + pd_3) 1
+degree(pd_1 + pd_4) 1
+degree(pd_2 + pd_3) 1
+degree(pd_2 + pd_4) 1
+degree(pd_3 + pd_4) 1
+
+apply(pd, x->(dim singularLocus(x))) {0, 0, 0, 0, 0}

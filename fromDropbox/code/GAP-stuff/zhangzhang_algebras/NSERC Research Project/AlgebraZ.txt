@@ -1,0 +1,36 @@
+-- Algebra Z:
+-- Source: Page 31, zhangzhang.txt
+-- July 22, 2020
+
+f = random(QQ)
+f = f^2
+-- if f*(f+1) == 0, print "error"
+
+-- Relations:
+
+xw + wx = 0
+zy - yz = 0
+yw - wz - xz = 0
+yx - xy - wz = 0
+zw - f*xy + wz = 0
+zx - f*wz + xz = 0
+
+-- Ideal:
+
+ideal(xw + wx, zy - yz, yw - wz - xz, yx - xy - wz, zw - f*xy + wz, zx - f*wz + xz)
+
+-- Results (f = 16/9):
+
+degree:    6
+dimension: 2 
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 1, 1, 6, 6} -- two conics, two lines, two embedded points (find the coordinates by taking radical)
+DimPrimaryDecomposition:    {2, 2, 2, 2, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 2, 1, 1}
+DimPrimaryDecomposition (radical): {2, 2, 2, 2}
+#primaryDecompositon: 4
+
+-- check that the conics are smooth, see how they meet and where

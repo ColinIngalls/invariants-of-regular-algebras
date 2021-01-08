@@ -1,0 +1,43 @@
+-- Algebra P:
+-- Source: page 28, zhangzhang
+-- Date: August 13, 2020
+
+-- f does not equal 1, special case when f = 0
+
+-- Relations:
+
+P = Q = (-1, 0)
+
+xw + wx = 0
+zy + yz = 0
+
+yw - wz - f*xz = 0
+yx - wz - xz = 0
+zw - wy + f*xy = 0
+zx + wy - xy = 0
+
+-- Ideal:
+
+ideal()
+
+-- Results (f = 0):
+
+degree:
+dimension:
+
+radical:
+
+DegreePrimaryDecomposition (radical): 
+DimPrimaryDecomposition (radical): 
+#primaryDecompositon: 
+
+-- Results (f =/= 0):
+
+degree:
+dimension:
+
+radical:
+
+DegreePrimaryDecomposition (radical): 
+DimPrimaryDecomposition (radical): 
+#primaryDecompositon: 

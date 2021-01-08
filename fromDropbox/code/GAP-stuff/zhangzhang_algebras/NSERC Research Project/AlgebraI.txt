@@ -1,0 +1,48 @@
+-- Algebra I:
+-- Source: Page 35, zhangzhang.txt
+-- Date: June 25, 2020
+
+-- k = ZZ/101, q = 10
+
+-- Relations:
+
+xw - qwx = 0
+zy + yz = 0
+yw + qwy + qxy - wz + qxz = 0
+yx - wy - xy - wz + qxz = 0
+zw - wy - qxy - qwz + qxz = 0
+zx + wy + qxy - wz + xz = 0
+
+-- Ideal:
+
+ideal(xw-q*wx, zy+yz, yw+q*wy+q*xy-wz+q*xz, yx-wy-xy-wz+q*xz, zw-wy-q*xy-q*wz+q*xz, zx+wy+q*xy-wz+xz)
+
+-- Results: 
+
+degree: 4
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 2, 2, 4, 4, 2, 2}
+DimPrimaryDecomposition: {2, 2, 1, 1, 1, 1, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 2}
+DimPrimaryDecomposition (radical): {2, 2}
+#primaryDecompositon: 2
+
+dimension SingularLocus: 
+
+
+-- The variety of this algebra is a pair of conics, as evidenced by {2,2}
+-- Want to determine if disjoint conics or not. 
+
+dim (pd_0 + pd_1)       0 -- They do not intersect
+degree (pd_0 + pd_1)    1
+
+dim singularLocus pd_0  0
+dim singularLocus pd_1  0
+
+-- Two smooth disjoint conics
+
+apply(pd, x->(dim singularLocus(x))) {0, 0}

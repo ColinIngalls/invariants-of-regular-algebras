@@ -1,0 +1,40 @@
+-- Algebra T:
+-- Source: Page 37, zhangzhang.txt
+-- July 9, 2020
+
+-- k = QQ
+
+-- Relations:
+
+P = Q = (-1, 0)
+
+xw + wx = 0
+zy + yz = 0
+
+yw + wy - xy - wz - xz = 0
+yx - wy + xy - wz - xz = 0
+zw - wy - xy - wz + xz = 0
+zx - wy - xy + wz - xz = 0
+
+-- ideal: 
+
+ideal(xw+wx, zy+yz, yw+wy-xy-wz-xz, yx-wy+xy-wz-xz, zw-wy-xy-wz+xz, zx-wy-xy+wz-xz)
+
+-- Results: 
+
+degree:   14
+dimension: 2 
+
+radical: false
+
+DegreePrimaryDecomposition: {8, 4, 2} -- One of the conics is doubled
+DimPrimaryDecomposition:    {2, 2, 2}
+
+DegreePrimaryDecomposition (radical): {2, 2, 8} -- Two conics and a degree-8 curve
+DimPrimaryDecomposition (radical): {2, 2, 2}
+#primaryDecompositon: 3
+
+-- dimension SingularLocus: 
+
+-- Ask prof about the pd_x data
+genus pd_2 

@@ -1,0 +1,32 @@
+-- Algebra N:
+-- Source: page 28, zhangzhang
+-- Date: August 13, 2020
+
+-- f^2 does not equal g^2
+
+-- Relations:
+
+P = Q = (-1, 0)
+
+xw + wx = 0
+zy + yz = 0
+
+yw + g*xy - f*xz = 0
+yx - g*wy - f*wz = 0
+zw - f*xy + g*xz = 0
+zx - f*wy - g*wz = 0
+
+-- Ideal:
+
+ideal(xw + wx, zy + yz, yw + g*xy - f*xz, yx - g*wy - f*wz, zw - f*xy + g*xz, zx - f*wy - g*wz)
+
+-- Results:
+
+degree:
+dimension:
+
+radical:
+
+DegreePrimaryDecomposition (radical): 
+DimPrimaryDecomposition (radical): 
+#primaryDecompositon: 

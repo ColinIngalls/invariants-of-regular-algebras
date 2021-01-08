@@ -1,0 +1,17 @@
+-- Algebra C
+-- Source: Page 38, zhangzhang.txt
+-- Date: July 9, 2020
+
+-- k = ZZ/601
+-- p = 24
+
+-- Relations:
+
+zy - p*yz = 0
+xw - p*wx = 0
+yw + wy - (p^2)*xy - wz + p*xz = 0
+yx + p*wy - xy - wz + p*xz = 0
+zw + p*wy + 2*(p^2)*xy - p*wz + p*xz = 0
+zx + p*wy - (p^2)*xy - wz + xz = 0
+
+-- Koszul Cohomology:

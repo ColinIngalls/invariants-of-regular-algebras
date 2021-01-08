@@ -1,0 +1,52 @@
+-- Algebra A:
+-- Source: page 23, zhangzhang.pdf
+-- Date: June 23, 2020
+
+-- Relations:
+
+wx - xw = 0
+yy + yz - zy = 0
+wy - yw = 0
+xy + wz - yx = 0
+zw - wz = 0
+zx + 2xy + wz - xz = 0
+
+-- Ideal:
+
+ideal(wx - xw, yy + yz - zy, wy - yw, xy + wz - yx, zw - wz, zx + 2*xy + wz - xz)
+
+-- Results:
+
+degree: 10
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 6, 3, 8} -- one of the conics is triple, and two embedded points
+DimPrimaryDecomposition: {2, 2, 2, 1, 1}
+
+-- computing the points' coordinates
+-- radical(pdv_3) 
+-- radical(pdv_4)
+
+DegreePrimaryDecomposition (radical): {2, 2, 2} 
+DimPrimaryDecomposition (radical): {2, 2, 2} 
+#primaryDecompositon (radical): 3
+
+dimension SingularLocus: 
+
+-- functions from I (but now with pd_0, pd_1, pd_2: pd_0 + pd_1, pd_0 + pd_2, etc)
+
+dim(pd_0 + pd_1)     1
+dim(pd_0 + pd_2)     1
+dim(pd_1 + pd_2)     0 -- No intersection; degree doesn't matter
+
+-- computing the points' coordinates
+radical(pd_0 + pd_1)
+radical(pd_0 + pd_2)
+
+degree(pd_0 + pd_1)  1
+degree(pd_0 + pd_2)  1
+degree(pd_1 + pd_2)  1
+
+apply(pd, x->(dim singularLocus(x))) {0, 0, 0} -- Smooth; no singularities

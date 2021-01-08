@@ -1,0 +1,45 @@
+-- Algebra F:
+-- Source: Page 26, zhangzhang
+-- Date: August 6, 2020
+
+-- k = ZZ/101, p = 10
+
+-- Relations:
+
+P = (p, 0), Q = (-1, 0)
+
+xw + wx = 0
+zy - p*yz = 0
+
+yw - wy + p*xy - wz + xz = 0
+yx + p*wy - xy - wz - xz = 0
+zw + p*wy - p*xy - p*wz - xz = 0
+zx + p*wy + p*xy - wz + p*xz = 0
+
+-- Ideal:
+
+ideal(xw + wx, zy - p*yz, yw - wy + p*xy - wz + xz, yx + p*wy - xy - wz - xz, zw + p*wy - p*xy - p*wz - xz, zx + p*wy + p*xy - wz + p*xz)
+
+-- Results:
+
+degree: 6
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 2, 2, 2, 2, 2, 4}
+DimPrimaryDecomposition: {2, 2, 2, 1, 1, 1, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 2, 2}
+DimPrimaryDecomposition (radical): {2, 2, 2}
+#primaryDecompositon (radical): 3
+
+dim(pd_0 + pd_1)    1
+dim(pd_0 + pd_2)    1
+dim(pd_1 + pd_2)    0
+
+degree(pd_0 + pd_1) 1
+degree(pd_0 + pd_2) 1
+degree(pd_1 + pd_2) 1
+
+apply(pd, x->(dim singularLocus(x))) {0, 0, 0}

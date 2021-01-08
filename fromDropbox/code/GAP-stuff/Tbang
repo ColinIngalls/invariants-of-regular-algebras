@@ -1,0 +1,20 @@
+IsQuotientOfPathAlgebra
+Vertices:
+1x_op
+Arrows:
+x1_op:1x_op->1x_op, x2_op:1x_op->1x_op, x3_op:1x_op->1x_op, x4_op:1x_op->1x_op
+Field:
+Rationals
+Relations:
+(1)*x1_op*x1_op,
+(1)*x2_op*x1_op,
+(1)*x1_op*x2_op,
+(1)*x2_op*x2_op,
+(1)*x1_op*x3_op + (-1/4)*x3_op*x1_op + (1/2)*x3_op*x2_op + (1/4)*x4_op*x2_op,
+(1)*x2_op*x3_op + (1/4)*x3_op*x1_op + (-1/2)*x3_op*x2_op + (1/2)*x4_op*x1_op + (1/4)*x4_op*x2_op,
+(1)*x3_op*x3_op,
+(1)*x4_op*x3_op,
+(1)*x1_op*x4_op + (1/4)*x3_op*x1_op + (1/2)*x3_op*x2_op + (-1/4)*x4_op*x2_op,
+(1)*x2_op*x4_op + (1/4)*x3_op*x1_op + (1/2)*x3_op*x2_op + (-1/2)*x4_op*x1_op + (1/4)*x4_op*x2_op,
+(1)*x3_op*x4_op,
+(1)*x4_op*x4_op
