@@ -1,0 +1,148 @@
+//Make the v1/v2 be subspaces span by column vectors
+//Concat Vertical -> Kernel Intersection
+//Concat Horizontally -> Adding Spans
+
+//-----COMPLETED TASK -----//
+//1.Concat those two vector space and compare the dimensions, and print if they are not a direct sum
+//2.1 Figure out identity element
+
+//------TODO LIST------//
+//TODO 2. Implement the tensor using user-defined functions. 
+//TODO 2.2 Make the I_2 receive input. 
+//TODO 3. Globalization? Read: https://magma.maths.usyd.edu.au/magma/handbook/text/1360 
+//TODO 4. Input that felix is working on
+
+P<x,y,a,b> := PolynomialRing(RationalField(),4);
+V1 := Matrix(P,2,2,[1,2,y,x]);
+V2 := Matrix(P,2,2,[1,2,y+4,y^2]);
+V3 := VerticalJoin(V1,V2);
+V3;
+k:= Minors(V3,2);
+"Minors:", k;
+pd:=PrimaryDecomposition(ideal<P|k>);
+"Intersections at",[Generators(i) :i in pd];
+
+//Demonstration of tensor product
+t1 := Matrix(P,2,2,[x,y,a,b]);
+t2 := Matrix(P,2,2,[1,2,3,4]);
+t12 := TensorProduct(t1,t2);
+//Notation: a11 = x, a12 = y, a21 = a, a22 = b
+//How to represent elementary element
+q1 := Matrix(P,2,4,[1,0,x,y,
+				   0,1,a,b]);
+q2 := Matrix(P,2,4,[1,0,x,y,
+				   0,1,a,b]);
+q3 := Matrix(P,2,4,[1,0,x,y,
+				   0,1,a,b]);
+q4 := Matrix(P,2,4,[1,0,x,y,
+				   0,1,a,b]);
+q5 := Matrix(P,2,4,[1,0,x,y,
+				   0,1,a,b]);
+q6 := Matrix(P,2,4,[1,0,x,y,
+				   0,1,a,b]);
+
+test1:=Matrix(P,4,1,[1,
+                     0,
+					 0,
+					 0]);
+
+test2:=Matrix(P,4,1,[0,
+                     1,
+					 0,
+					 0]);
+
+I2 := Matrix(P,16,10,[1,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,1,0,0,0,0,0,
+					  0,0,0,0,0,1,0,0,0,0,
+					  0,0,0,0,0,0,1,0,0,0,
+					  0,1,0,0,0,0,0,0,0,0,
+					  0,0,0,0,0,0,0,1,0,0,
+					  0,0,0,0,0,0,0,0,1,0,
+					  0,0,0,0,0,0,0,0,0,0,
+					  0,0,1,0,0,0,0,0,0,0,
+					  0,0,0,0,0,0,0,0,0,1,
+					  0,0,0,0,0,0,0,0,0,0,
+					  0,0,0,0,0,0,0,0,0,0,
+					  0,0,0,1,0,0,0,0,0,0,
+					  0,0,0,0,0,0,0,0,0,0,
+					  0,0,0,0,0,0,0,0,0,0,
+					  0,0,0,0,0,0,0,0,0,0]);
+
+Rank(I2);
+
+V := ScalarMatrix(P,4,1);
+
+
+//e_i tensor e_i, i:=1..4; //4 of these
+//e_i tensor e_j + q_ij, xj tensor xi //6
+
+
+q1V := TensorProduct(q1,V);
+q2V := TensorProduct(q2,V);
+q3V := TensorProduct(q3,V);
+q4V := TensorProduct(q4,V);
+q5V := TensorProduct(q5,V);
+q6V := TensorProduct(q6,V);
+
+//dimension of qV is 8, and I2 is 10
+//dimension of intersection is equal to the dimension of the sum-18
+//So we want the dimension of sum to be greater or eq to 21
+qVI_1 := HorizontalJoin(Transpose(q1V),I2);
+qVI_1_minor:= Minors(qVI_1,15);
+
+qVI_2 := HorizontalJoin(Transpose(q2V),I2);
+qVI_2_minor:= Minors(qVI_2,15);
+
+qVI_3 := HorizontalJoin(Transpose(q3V),I2);
+qVI_3_minor:= Minors(qVI_3,15);
+
+qVI_4 := HorizontalJoin(Transpose(q4V),I2);
+qVI_4_minor:= Minors(qVI_4,15);
+
+qVI_5 := HorizontalJoin(Transpose(q5V),I2);
+qVI_5_minor:= Minors(qVI_5,15);
+
+qVI_6 := HorizontalJoin(Transpose(q6V),I2);
+qVI_6_minor:= Minors(qVI_6,15);
+
+
+QQ := RationalField();
+
+//Matching P5 to the Magma's Minors convention
+P5<e12,e13,e14,e23,e24,e34>:= ProjectiveSpace(QQ,5); //Plucker
+//TODO: assign variables to the P5
+G := Scheme(P5, [e12*e34-e24*e13+e23*e14]);
+
+
+//Question: Why do we need affine patch?
+AP := AffinePatch(G,1);
+AP;
+
+//TODO: Make github repo 
+A4 := Spec(P);
+f1 := map<A4 -> G | Minors(q1,2)>;
+f2 := map<A4 -> G | Minors(q2,2)>;
+f3 := map<A4 -> G | Minors(q3,2)>;
+f4 := map<A4 -> G | Minors(q4,2)>;
+f5 := map<A4 -> G | Minors(q5,2)>;
+f6 := map<A4 -> G | Minors(q6,2)>;
+
+//Question: Subscheme function doesn't exist?
+lineSchemePatch_1 := Scheme(A4,qVI_1_minor);
+lineSchemePatch_2 := Scheme(A4,qVI_2_minor);
+lineSchemePatch_3 := Scheme(A4,qVI_3_minor);
+lineSchemePatch_4 := Scheme(A4,qVI_4_minor);
+lineSchemePatch_5 := Scheme(A4,qVI_5_minor);
+lineSchemePatch_6 := Scheme(A4,qVI_6_minor);
+
+//Question: ProjectiveClosure and Image function only takes one argument
+closure_1 := ProjectiveClosure(lineSchemePatch_1);
+
+//and until closure_6
+
+
+//"union is",Union(closure_1,closure_2);
+
+
+
+
