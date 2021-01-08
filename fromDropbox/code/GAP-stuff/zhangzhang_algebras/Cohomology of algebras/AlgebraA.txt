@@ -1,0 +1,14 @@
+-- Algebra A:
+-- Source: page 23, zhangzhang.pdf
+-- Date: June 23, 2020
+
+-- Relations:
+
+wx - xw = 0
+yy + yz - zy = 0
+wy - yw = 0
+xy + wz - yx = 0
+zw - wz = 0
+zx + 2xy + wz - xz = 0
+
+--Koszul Cohomology:

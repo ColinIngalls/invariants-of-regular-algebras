@@ -1,0 +1,51 @@
+-- Algebra G:
+-- Source: Page 26, zhangzhang
+-- Date: August 8, 2020
+
+-- p is general, f does not equal 0
+
+-- Relations:
+
+P = (p, 0), Q = (1, 0)
+
+xw - wx = 0
+zy - p*yz = 0
+
+yw - p*wy = 0
+yx - p*wy - (p^2)*xy - wz = 0
+zw - p*wz = 0
+zx - f*wy + wz - xz = 0
+
+-- Ideal:
+
+ideal(xw - wx, zy - p*yz, yw - p*wy, yx - p*wy - (p^2)*xy - wz, zw - p*wz, zx - f*wy + wz - xz)
+
+-- Results (p = 2/3, f = 5/8):
+
+degree: 8
+dimension: 2
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 2, 2, 2, 4, 4, 4}
+DimPrimaryDecomposition: {2, 2, 2, 2, 1, 1, 1}
+
+DegreePrimaryDecomposition (radical): {2, 2, 2, 2} -- four conics
+DimPrimaryDecomposition (radical): {2, 2, 2, 2}
+#primaryDecompositon (radical): 4
+
+dim(pd_0 + pd_1)    1
+dim(pd_0 + pd_2)    1
+dim(pd_0 + pd_3)    0
+dim(pd_1 + pd_2)    1
+dim(pd_1 + pd_3)    1
+dim(pd_2 + pd_3)    1
+
+degree(pd_0 + pd_1) 1
+degree(pd_0 + pd_2) 1
+degree(pd_0 + pd_3) 1
+degree(pd_1 + pd_2) 1
+degree(pd_1 + pd_3) 1
+degree(pd_2 + pd_3) 1
+
+apply(pd, x->(dim singularLocus(x))) {0, 0, 0, 0}

@@ -1,0 +1,5 @@
+-- Algebra H
+-- Source: page 26, zhangzhang
+-- Date: August 8, 2020
+
+-- Try f = 0, f =/= 0 and see the results

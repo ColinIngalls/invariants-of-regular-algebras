@@ -1,0 +1,49 @@
+-- Algebra O:
+-- Source: Page 37, zhangzhang.txt
+-- July 21, 2020
+
+-- Two Cases: f = 0, f = random number not 1
+
+-- Relations:
+
+P = Q = (-1, 0)
+xw + wx = 0
+zy + yz = 0
+
+yw - wy - f*xz = 0
+yx + xy - wz = 0
+zw - f*xy + wz = 0
+zx - wy - xz = 0
+
+-- Ideal:
+
+ideal(xw + wx, zy + yz, yw - wy - f*xz, yx + xy - wz, zw - f*xy + wz, zx - wy - xz)
+
+
+-- Results (Case 1: f = 0):
+
+degree:    4
+dimension: 3
+
+radical: false
+
+DegreePrimaryDecomposition: {2, 4, 8} -- Embedded (double) points: degree-8 embedded curve
+DimPrimaryDecomposition:    {2, 3, 2}
+
+DegreePrimaryDecomposition (radical): {4, 2}
+DimPrimaryDecomposition (radical):    {3, 2}
+#primaryDecompositon: 2
+
+
+-- Results (Case 2: f = random number not 1 (f = 2)):
+
+degree:   12
+dimension: 2
+
+radical: true
+
+DegreePrimaryDecomposition: {2, 2, 8}
+DimPrimaryDecomposition:    {2, 2, 2}
+#primaryDecompositon: 3
+
+-- singularLocus function

@@ -1,0 +1,65 @@
+-- Algebra E:
+-- Source: Page 25, zhangzhang
+-- Date: August 6, 2020
+
+-- k = ZZ/101, p = 10
+--GaussianRationals
+
+-- Relations:
+
+P = (p, 0), Q = (-1, 0)
+
+xw + wx = 0
+zy - p*yz = 0
+
+yw - wz - xz = 0
+yx - wz + xz = 0
+zw + wy - xy = 0
+zx - wy - xy = 0
+
+-- Ideal:
+
+ideal(xw + wx, zy - p*yz, yw - wz - xz, yx - wz + xz, zw + wy - xy, zx - wy - xy)
+
+-- Results:
+
+degree: 12
+dimension: 2
+
+radical: true
+
+DegreePrimaryDecomposition: {2, 2, 2, 2, 2, 2} -- Six conics
+DimPrimaryDecomposition: {2, 2, 2, 2, 2, 2}
+#primaryDecompositon: 6
+
+dim(pd_0 + pd_1)    0
+dim(pd_0 + pd_2)    1
+dim(pd_0 + pd_3)    1
+dim(pd_0 + pd_4)    1 -- Graph all this
+dim(pd_0 + pd_5)    1
+dim(pd_1 + pd_2)    1
+dim(pd_1 + pd_3)    1
+dim(pd_1 + pd_4)    1
+dim(pd_1 + pd_5)    1
+dim(pd_2 + pd_3)    1
+dim(pd_2 + pd_4)    0
+dim(pd_2 + pd_5)    0
+dim(pd_3 + pd_4)    0
+dim(pd_3 + pd_5)    0
+dim(pd_4 + pd_5)    1
+
+degree(pd_0 + pd_1) 1
+degree(pd_0 + pd_2) 1
+degree(pd_0 + pd_3) 1
+degree(pd_0 + pd_4) 1
+degree(pd_0 + pd_5) 1
+degree(pd_1 + pd_2) 1
+degree(pd_1 + pd_3) 1
+degree(pd_1 + pd_4) 1
+degree(pd_1 + pd_5) 1
+degree(pd_2 + pd_3) 1
+degree(pd_2 + pd_4) 1
+degree(pd_2 + pd_5) 1
+degree(pd_3 + pd_4) 1
+degree(pd_3 + pd_5) 1
+degree(pd_4 + pd_5) 1
