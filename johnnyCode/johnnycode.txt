@@ -26,30 +26,25 @@ pd:=PrimaryDecomposition(ideal<P|k>);
 t1 := Matrix(P,2,2,[x,y,a,b]);
 t2 := Matrix(P,2,2,[1,2,3,4]);
 t12 := TensorProduct(t1,t2);
+
 //Notation: a11 = x, a12 = y, a21 = a, a22 = b
-//How to represent elementary element
-q1 := Matrix(P,2,4,[1,0,x,y,
-				   0,1,a,b]);
-q2 := Matrix(P,2,4,[1,0,x,y,
-				   0,1,a,b]);
-q3 := Matrix(P,2,4,[1,0,x,y,
-				   0,1,a,b]);
-q4 := Matrix(P,2,4,[1,0,x,y,
-				   0,1,a,b]);
-q5 := Matrix(P,2,4,[1,0,x,y,
-				   0,1,a,b]);
-q6 := Matrix(P,2,4,[1,0,x,y,
-				   0,1,a,b]);
+q12 := Matrix(P,2,4,[1,0,x,y,
+				     0,1,a,b]);
+q13 := Matrix(P,2,4,[1,x,0,y,
+				     0,a,1,b]);
+q14 := Matrix(P,2,4,[1,y,x,0,
+				     0,b,a,1]);
+q23 := Matrix(P,2,4,[x,1,0,y,
+				     a,0,1,b]);
+q24 := Matrix(P,2,4,[x,1,y,0,
+				     a,0,b,1]);
+q34 := Matrix(P,2,4,[x,y,1,0,
+				     a,b,0,1]);
 
-test1:=Matrix(P,4,1,[1,
-                     0,
-					 0,
-					 0]);
-
-test2:=Matrix(P,4,1,[0,
-                     1,
-					 0,
-					 0]);
+//I2 here means I2_perp
+//w^2 is e1
+//w*x is e2 
+//w*y is e3 ... z^2 is e16
 
 I2 := Matrix(P,16,10,[1,0,0,0,0,0,0,0,0,0,
                       0,0,0,0,1,0,0,0,0,0,
@@ -72,76 +67,71 @@ Rank(I2);
 
 V := ScalarMatrix(P,4,1);
 
-
-//e_i tensor e_i, i:=1..4; //4 of these
-//e_i tensor e_j + q_ij, xj tensor xi //6
-
-
-q1V := TensorProduct(q1,V);
-q2V := TensorProduct(q2,V);
-q3V := TensorProduct(q3,V);
-q4V := TensorProduct(q4,V);
-q5V := TensorProduct(q5,V);
-q6V := TensorProduct(q6,V);
+q12V := TensorProduct(q12,V);
+q13V := TensorProduct(q13,V);
+q14V := TensorProduct(q14,V);
+q23V := TensorProduct(q23,V);
+q24V := TensorProduct(q24,V);
+q34V := TensorProduct(q34,V);
 
 //dimension of qV is 8, and I2 is 10
 //dimension of intersection is equal to the dimension of the sum-18
 //So we want the dimension of sum to be greater or eq to 21
-qVI_1 := HorizontalJoin(Transpose(q1V),I2);
-qVI_1_minor:= Minors(qVI_1,15);
+qVI_12 := HorizontalJoin(Transpose(q12V),I2);
+qVI_12_minor:= Minors(qVI_12,15);
 
-qVI_2 := HorizontalJoin(Transpose(q2V),I2);
-qVI_2_minor:= Minors(qVI_2,15);
+qVI_13 := HorizontalJoin(Transpose(q13V),I2);
+qVI_13_minor:= Minors(qVI_13,15);
 
-qVI_3 := HorizontalJoin(Transpose(q3V),I2);
-qVI_3_minor:= Minors(qVI_3,15);
+qVI_14 := HorizontalJoin(Transpose(q14V),I2);
+qVI_14_minor:= Minors(qVI_14,15);
 
-qVI_4 := HorizontalJoin(Transpose(q4V),I2);
-qVI_4_minor:= Minors(qVI_4,15);
+qVI_23 := HorizontalJoin(Transpose(q23V),I2);
+qVI_23_minor:= Minors(qVI_23,15);
 
-qVI_5 := HorizontalJoin(Transpose(q5V),I2);
-qVI_5_minor:= Minors(qVI_5,15);
+qVI_24 := HorizontalJoin(Transpose(q24V),I2);
+qVI_24_minor:= Minors(qVI_24,15);
 
-qVI_6 := HorizontalJoin(Transpose(q6V),I2);
-qVI_6_minor:= Minors(qVI_6,15);
+qVI_34 := HorizontalJoin(Transpose(q34V),I2);
+qVI_34_minor:= Minors(qVI_34,15);
 
 
 QQ := RationalField();
 
 //Matching P5 to the Magma's Minors convention
-P5<e12,e13,e14,e23,e24,e34>:= ProjectiveSpace(QQ,5); //Plucker
-//TODO: assign variables to the P5
+
+P5<e34,e24,e23,e14,e13,e12>:= ProjectiveSpace(QQ,5); //Plucker
 G := Scheme(P5, [e12*e34-e24*e13+e23*e14]);
 
 
-//Question: Why do we need affine patch?
-AP := AffinePatch(G,1);
-AP;
-
-//TODO: Make github repo 
 A4 := Spec(P);
-f1 := map<A4 -> G | Minors(q1,2)>;
-f2 := map<A4 -> G | Minors(q2,2)>;
-f3 := map<A4 -> G | Minors(q3,2)>;
-f4 := map<A4 -> G | Minors(q4,2)>;
-f5 := map<A4 -> G | Minors(q5,2)>;
-f6 := map<A4 -> G | Minors(q6,2)>;
+f12 := map<A4 -> G | Minors(q12,2)>;
+f13 := map<A4 -> G | Minors(q13,2)>;
+f14 := map<A4 -> G | Minors(q14,2)>;
+f23 := map<A4 -> G | Minors(q23,2)>;
+f24 := map<A4 -> G | Minors(q24,2)>;
+f34 := map<A4 -> G | Minors(q34,2)>;
 
-//Question: Subscheme function doesn't exist?
-lineSchemePatch_1 := Scheme(A4,qVI_1_minor);
-lineSchemePatch_2 := Scheme(A4,qVI_2_minor);
-lineSchemePatch_3 := Scheme(A4,qVI_3_minor);
-lineSchemePatch_4 := Scheme(A4,qVI_4_minor);
-lineSchemePatch_5 := Scheme(A4,qVI_5_minor);
-lineSchemePatch_6 := Scheme(A4,qVI_6_minor);
+lineSchemePatch_1 := Scheme(A4,qVI_12_minor);
+lineSchemePatch_2 := Scheme(A4,qVI_13_minor);
+lineSchemePatch_3 := Scheme(A4,qVI_14_minor);
+lineSchemePatch_4 := Scheme(A4,qVI_23_minor);
+lineSchemePatch_5 := Scheme(A4,qVI_24_minor);
+lineSchemePatch_6 := Scheme(A4,qVI_34_minor);
 
-//Question: ProjectiveClosure and Image function only takes one argument
-closure_1 := ProjectiveClosure(lineSchemePatch_1);
+closure_1 := f12(lineSchemePatch_1);
+closure_2 := f13(lineSchemePatch_2);
+closure_3 := f14(lineSchemePatch_3);
+closure_4 := f23(lineSchemePatch_4);
+closure_5 := f24(lineSchemePatch_5);
+closure_6 := f34(lineSchemePatch_6);
 
 //and until closure_6
 
+//Question: Union(closure_1,closure_2), and Union(clousre_1,...,closure_6) output the same result. I anticipate there is a problem in either the Scheme or putting the
+//lineshcemepatch into the function that we made.
 
-//"union is",Union(closure_1,closure_2);
+"union is",Union(Union(Union(Union(Union(closure_1,closure_2),closure_3),closure_4),closure_5),closure_6);
 
 
 
