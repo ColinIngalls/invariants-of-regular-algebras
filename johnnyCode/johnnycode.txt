@@ -44,9 +44,49 @@ q34 := Matrix(P,2,4,[x,y,1,0,
 //I2 here means I2_perp
 //w^2 is e1
 //w*x is e2 
-//w*y is e3 ... z^2 is e16
+//w*y is e3
+//w*z is e4
+//xw is e5
+//x^2 is e6
+//xy is e7
+//xz is e8
+//yw is e9
+//yx is e10
+//y^2 is e11
+//yz is e12
+//zw is e13
+//zx is e14
+//zy is e15
+//z^2 is e16
 
-I2 := Matrix(P,16,10,[1,0,0,0,0,0,0,0,0,0,
+//wx+xw,wy+yw,wz+zw,xy+yw,xz+zx,yz+zy
+I2_original := Matrix(P,16,6,
+[0,0,0,0,0,0,
+ 1,0,0,0,0,0,
+ 0,1,0,0,0,0,
+ 0,0,1,0,0,0,
+ 1,0,0,0,0,0,
+ 0,0,0,0,0,0,
+ 0,0,0,1,0,0,
+ 0,0,0,0,1,0,
+ 0,1,0,0,0,0,
+ 0,0,0,1,0,0,
+ 0,0,0,0,0,0,
+ 0,0,0,0,0,1,
+ 0,0,1,0,0,0,
+ 0,0,0,0,1,0,
+ 0,0,0,0,0,1,
+ 0,0,0,0,0,0
+]
+);
+
+I2_perp := Transpose(NullspaceMatrix(I2_original));
+
+"I2_perp is",I2_perp;
+
+I2 := I2_perp;
+
+/*I2 := Matrix(P,16,10,[1,0,0,0,0,0,0,0,0,0,
                       0,0,0,0,1,0,0,0,0,0,
 					  0,0,0,0,0,1,0,0,0,0,
 					  0,0,0,0,0,0,1,0,0,0,
@@ -62,7 +102,7 @@ I2 := Matrix(P,16,10,[1,0,0,0,0,0,0,0,0,0,
 					  0,0,0,0,0,0,0,0,0,0,
 					  0,0,0,0,0,0,0,0,0,0,
 					  0,0,0,0,0,0,0,0,0,0]);
-
+*/
 Rank(I2);
 
 V := ScalarMatrix(P,4,1);
@@ -131,8 +171,19 @@ closure_6 := f34(lineSchemePatch_6);
 //Question: Union(closure_1,closure_2), and Union(clousre_1,...,closure_6) output the same result. I anticipate there is a problem in either the Scheme or putting the
 //lineshcemepatch into the function that we made.
 
-"union is",Union(Union(Union(Union(Union(closure_1,closure_2),closure_3),closure_4),closure_5),closure_6);
+"Closure 1", closure_1;
+"Closure 2", closure_2;
+"Closure 3", closure_3;
+"Closure 4", closure_4;
+"Closure 5", closure_5;
+"Closure 6", closure_6;
 
+l := Union(Union(Union(Union(Union(closure_1,closure_2),closure_3),closure_4),closure_5),closure_6);
 
+"this is l",l;
 
-
+"Dimension of l", Dimension(l);
+"Degree of l", Degree(l);
+comp := IrreducibleComponents(l);
+[Degree(I): I in comp];
+[Dimension(I): I in comp];
