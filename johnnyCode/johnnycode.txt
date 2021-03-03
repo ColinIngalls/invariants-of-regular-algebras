@@ -12,8 +12,9 @@
 //TODO 3. Globalization? Read: https://magma.maths.usyd.edu.au/magma/handbook/text/1360 
 //TODO 4. Input that felix is working on
 
+
 P<x,y,a,b> := PolynomialRing(RationalField(),4);
-V1 := Matrix(P,2,2,[1,2,y,x]);
+/*V1 := Matrix(P,2,2,[1,2,y,x]);
 V2 := Matrix(P,2,2,[1,2,y+4,y^2]);
 V3 := VerticalJoin(V1,V2);
 V3;
@@ -25,15 +26,15 @@ pd:=PrimaryDecomposition(ideal<P|k>);
 //Demonstration of tensor product
 t1 := Matrix(P,2,2,[x,y,a,b]);
 t2 := Matrix(P,2,2,[1,2,3,4]);
-t12 := TensorProduct(t1,t2);
+t12 := TensorProduct(t1,t2);*/
 
 //Notation: a11 = x, a12 = y, a21 = a, a22 = b
 q12 := Matrix(P,2,4,[1,0,x,y,
 				     0,1,a,b]);
 q13 := Matrix(P,2,4,[1,x,0,y,
 				     0,a,1,b]);
-q14 := Matrix(P,2,4,[1,y,x,0,
-				     0,b,a,1]);
+q14 := Matrix(P,2,4,[1,x,y,0,
+				     0,a,b,1]);
 q23 := Matrix(P,2,4,[x,1,0,y,
 				     a,0,1,b]);
 q24 := Matrix(P,2,4,[x,1,y,0,
@@ -86,28 +87,13 @@ I2_perp := Transpose(NullspaceMatrix(I2_original));
 
 I2 := I2_perp;
 
-/*I2 := Matrix(P,16,10,[1,0,0,0,0,0,0,0,0,0,
-                      0,0,0,0,1,0,0,0,0,0,
-					  0,0,0,0,0,1,0,0,0,0,
-					  0,0,0,0,0,0,1,0,0,0,
-					  0,1,0,0,0,0,0,0,0,0,
-					  0,0,0,0,0,0,0,1,0,0,
-					  0,0,0,0,0,0,0,0,1,0,
-					  0,0,0,0,0,0,0,0,0,0,
-					  0,0,1,0,0,0,0,0,0,0,
-					  0,0,0,0,0,0,0,0,0,1,
-					  0,0,0,0,0,0,0,0,0,0,
-					  0,0,0,0,0,0,0,0,0,0,
-					  0,0,0,1,0,0,0,0,0,0,
-					  0,0,0,0,0,0,0,0,0,0,
-					  0,0,0,0,0,0,0,0,0,0,
-					  0,0,0,0,0,0,0,0,0,0]);
-*/
 Rank(I2);
 
 V := ScalarMatrix(P,4,1);
+"V is ",V;
 
 q12V := TensorProduct(q12,V);
+"q12V is ", q12V;
 q13V := TensorProduct(q13,V);
 q14V := TensorProduct(q14,V);
 q23V := TensorProduct(q23,V);
@@ -118,22 +104,24 @@ q34V := TensorProduct(q34,V);
 //dimension of intersection is equal to the dimension of the sum-18
 //So we want the dimension of sum to be greater or eq to 21
 qVI_12 := HorizontalJoin(Transpose(q12V),I2);
-qVI_12_minor:= Minors(qVI_12,15);
+"qVI_12 is", qVI_12;
+qVI_12_minor:= Minors(qVI_12,16);
+//"q12V minor is",qVI_12_minor;
 
 qVI_13 := HorizontalJoin(Transpose(q13V),I2);
-qVI_13_minor:= Minors(qVI_13,15);
+qVI_13_minor:= Minors(qVI_13,16);
 
 qVI_14 := HorizontalJoin(Transpose(q14V),I2);
-qVI_14_minor:= Minors(qVI_14,15);
+qVI_14_minor:= Minors(qVI_14,16);
 
 qVI_23 := HorizontalJoin(Transpose(q23V),I2);
-qVI_23_minor:= Minors(qVI_23,15);
+qVI_23_minor:= Minors(qVI_23,16);
 
 qVI_24 := HorizontalJoin(Transpose(q24V),I2);
-qVI_24_minor:= Minors(qVI_24,15);
+qVI_24_minor:= Minors(qVI_24,16);
 
 qVI_34 := HorizontalJoin(Transpose(q34V),I2);
-qVI_34_minor:= Minors(qVI_34,15);
+qVI_34_minor:= Minors(qVI_34,16);
 
 
 QQ := RationalField();
@@ -141,8 +129,7 @@ QQ := RationalField();
 //Matching P5 to the Magma's Minors convention
 
 P5<e34,e24,e23,e14,e13,e12>:= ProjectiveSpace(QQ,5); //Plucker
-G := Scheme(P5, [e12*e34-e24*e13+e23*e14]);
-
+G := Scheme(P5, e12*e34-e24*e13+e23*e14);
 
 A4 := Spec(P);
 f12 := map<A4 -> G | Minors(q12,2)>;
@@ -179,6 +166,7 @@ closure_6 := f34(lineSchemePatch_6);
 "Closure 6", closure_6;
 
 l := Union(Union(Union(Union(Union(closure_1,closure_2),closure_3),closure_4),closure_5),closure_6);
+//l := Union(closure_1,closure_2,closure_3,closure_4,closure_5,closure_6);
 
 "this is l",l;
 
