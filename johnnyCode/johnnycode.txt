@@ -1,34 +1,25 @@
-//Make the v1/v2 be subspaces span by column vectors
-//Concat Vertical -> Kernel Intersection
-//Concat Horizontally -> Adding Spans
-
 //-----COMPLETED TASK -----//
 //1.Concat those two vector space and compare the dimensions, and print if they are not a direct sum
+//2. Implement the tensor using user-defined functions. 
 //2.1 Figure out identity element
 
 //------TODO LIST------//
-//TODO 2. Implement the tensor using user-defined functions. 
 //TODO 2.2 Make the I_2 receive input. 
 //TODO 3. Globalization? Read: https://magma.maths.usyd.edu.au/magma/handbook/text/1360 
 //TODO 4. Input that felix is working on
 
+QQ := RationalField();
 
-P<x,y,a,b> := PolynomialRing(RationalField(),4);
-/*V1 := Matrix(P,2,2,[1,2,y,x]);
-V2 := Matrix(P,2,2,[1,2,y+4,y^2]);
-V3 := VerticalJoin(V1,V2);
-V3;
-k:= Minors(V3,2);
-"Minors:", k;
-pd:=PrimaryDecomposition(ideal<P|k>);
-"Intersections at",[Generators(i) :i in pd];
+FF<p> := PolynomialRing(QQ);
 
-//Demonstration of tensor product
-t1 := Matrix(P,2,2,[x,y,a,b]);
-t2 := Matrix(P,2,2,[1,2,3,4]);
-t12 := TensorProduct(t1,t2);*/
+//Choose what field depending on whether it needs a imaginary number or not
 
-//Notation: a11 = x, a12 = y, a21 = a, a22 = b
+N<k> := NumberField(p^2+p+1);
+//N := QQ;
+//F := RationalField();
+
+P<x,y,a,b> := PolynomialRing(N,4);
+
 q12 := Matrix(P,2,4,[1,0,x,y,
 				     0,1,a,b]);
 q13 := Matrix(P,2,4,[1,x,0,y,
@@ -42,71 +33,32 @@ q24 := Matrix(P,2,4,[x,1,y,0,
 q34 := Matrix(P,2,4,[x,y,1,0,
 				     a,b,0,1]);
 
-//I2 here means I2_perp
-//w^2 is e1
-//w*x is e2 
-//w*y is e3
-//w*z is e4
-//xw is e5
-//x^2 is e6
-//xy is e7
-//xz is e8
-//yw is e9
-//yx is e10
-//y^2 is e11
-//yz is e12
-//zw is e13
-//zx is e14
-//zy is e15
-//z^2 is e16
+F<w,x,y,z> := FreeAlgebra(N,4);
+G := [w,x,y,z];
 
-//wx+xw,wy+yw,wz+zw,xy+yw,xz+zx,yz+zy
-I2_original := Matrix(P,16,6,
-[0,0,0,0,0,0,
- 1,0,0,0,0,0,
- 0,1,0,0,0,0,
- 0,0,1,0,0,0,
- 1,0,0,0,0,0,
- 0,0,0,0,0,0,
- 0,0,0,1,0,0,
- 0,0,0,0,1,0,
- 0,1,0,0,0,0,
- 0,0,0,1,0,0,
- 0,0,0,0,0,0,
- 0,0,0,0,0,1,
- 0,0,1,0,0,0,
- 0,0,0,0,1,0,
- 0,0,0,0,0,1,
- 0,0,0,0,0,0
-]
-);
+
+f := [z*y-k*y*z,x*w+k*w*x,y*w+w*y-k^2*x*y+k*x*z,y*x+k*w*y-x*y-w*z+k*x*z,z*w+k*w*y+2*k^2*x*y-k*w*z+k*x*z,z*x+k*w*y-k^2*x*y-w*z+x*z];
+m := [B*A: A in G,B in G];
+I2_original := Transpose(Matrix(P,6,16,[[MonomialCoefficient(l,k): k in m] : l in f]));
 
 I2_perp := Transpose(NullspaceMatrix(I2_original));
-
-"I2_perp is",I2_perp;
 
 I2 := I2_perp;
 
 Rank(I2);
 
 V := ScalarMatrix(P,4,1);
-"V is ",V;
 
 q12V := TensorProduct(q12,V);
-"q12V is ", q12V;
 q13V := TensorProduct(q13,V);
 q14V := TensorProduct(q14,V);
 q23V := TensorProduct(q23,V);
 q24V := TensorProduct(q24,V);
 q34V := TensorProduct(q34,V);
 
-//dimension of qV is 8, and I2 is 10
-//dimension of intersection is equal to the dimension of the sum-18
-//So we want the dimension of sum to be greater or eq to 21
 qVI_12 := HorizontalJoin(Transpose(q12V),I2);
-"qVI_12 is", qVI_12;
+"qVI_12",qVI_12;
 qVI_12_minor:= Minors(qVI_12,16);
-//"q12V minor is",qVI_12_minor;
 
 qVI_13 := HorizontalJoin(Transpose(q13V),I2);
 qVI_13_minor:= Minors(qVI_13,16);
@@ -124,11 +76,10 @@ qVI_34 := HorizontalJoin(Transpose(q34V),I2);
 qVI_34_minor:= Minors(qVI_34,16);
 
 
-QQ := RationalField();
 
 //Matching P5 to the Magma's Minors convention
 
-P5<e34,e24,e23,e14,e13,e12>:= ProjectiveSpace(QQ,5); //Plucker
+P5<e34,e24,e23,e14,e13,e12>:= ProjectiveSpace(N,5); //Plucker
 G := Scheme(P5, e12*e34-e24*e13+e23*e14);
 
 A4 := Spec(P);
@@ -147,31 +98,28 @@ lineSchemePatch_5 := Scheme(A4,qVI_24_minor);
 lineSchemePatch_6 := Scheme(A4,qVI_34_minor);
 
 closure_1 := f12(lineSchemePatch_1);
+"closure_1";
 closure_2 := f13(lineSchemePatch_2);
+"closure_2";
 closure_3 := f14(lineSchemePatch_3);
+"closure_3";
 closure_4 := f23(lineSchemePatch_4);
+"closure_4";
 closure_5 := f24(lineSchemePatch_5);
+"closure_5";
 closure_6 := f34(lineSchemePatch_6);
+"closure_6";
 
-//and until closure_6
-
-//Question: Union(closure_1,closure_2), and Union(clousre_1,...,closure_6) output the same result. I anticipate there is a problem in either the Scheme or putting the
-//lineshcemepatch into the function that we made.
-
-"Closure 1", closure_1;
-"Closure 2", closure_2;
-"Closure 3", closure_3;
-"Closure 4", closure_4;
-"Closure 5", closure_5;
-"Closure 6", closure_6;
 
 l := Union(Union(Union(Union(Union(closure_1,closure_2),closure_3),closure_4),closure_5),closure_6);
-//l := Union(closure_1,closure_2,closure_3,closure_4,closure_5,closure_6);
 
 "this is l",l;
 
-"Dimension of l", Dimension(l);
-"Degree of l", Degree(l);
-comp := IrreducibleComponents(l);
-[Degree(I): I in comp];
-[Dimension(I): I in comp];
+red_l := ReducedSubscheme(l);
+comp := IrreducibleComponents(red_l);
+sing_l := [SingularSubscheme(I): I in comp];
+sing_l;
+"Dimension of l", Dimension(red_l);
+"Dimension,degree of components:",[[Dimension(comp[I]),Degree(comp[I]),Dimension(sing_l[I]),Degree(sing_l[I])]: I in [1..#comp]];
+
+
