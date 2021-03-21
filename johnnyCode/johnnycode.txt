@@ -10,11 +10,11 @@
 
 QQ := RationalField();
 
-FF<p> := PolynomialRing(QQ);
+FF<k> := PolynomialRing(QQ);
 
 //Choose what field depending on whether it needs a imaginary number or not
 
-N<k> := NumberField(p^2+p+1);
+N<p> := NumberField(k^2+1);
 //N := QQ;
 //F := RationalField();
 
@@ -36,16 +36,28 @@ q34 := Matrix(P,2,4,[x,y,1,0,
 F<w,x,y,z> := FreeAlgebra(N,4);
 G := [w,x,y,z];
 
+d := 157;
+f := [
+x*w + w*x,
 
-f := [z*y-k*y*z,x*w+k*w*x,y*w+w*y-k^2*x*y+k*x*z,y*x+k*w*y-x*y-w*z+k*x*z,z*w+k*w*y+2*k^2*x*y-k*w*z+k*x*z,z*x+k*w*y-k^2*x*y-w*z+x*z];
+z*y - p*y*z,
+
+y*w + w*y + p*x*y - w*z + x*z,
+
+y*x + p*w*y - x*y - w*z - x*z,
+
+z*w + p*w*y - p*x*y - p*w*z - x*z,
+
+z*x + p*w*y + p*x*y - w*z + p*x*z
+
+	 ];
+
 m := [B*A: A in G,B in G];
 I2_original := Transpose(Matrix(P,6,16,[[MonomialCoefficient(l,k): k in m] : l in f]));
 
 I2_perp := Transpose(NullspaceMatrix(I2_original));
 
 I2 := I2_perp;
-
-Rank(I2);
 
 V := ScalarMatrix(P,4,1);
 
@@ -57,7 +69,6 @@ q24V := TensorProduct(q24,V);
 q34V := TensorProduct(q34,V);
 
 qVI_12 := HorizontalJoin(Transpose(q12V),I2);
-"qVI_12",qVI_12;
 qVI_12_minor:= Minors(qVI_12,16);
 
 qVI_13 := HorizontalJoin(Transpose(q13V),I2);
@@ -97,29 +108,25 @@ lineSchemePatch_4 := Scheme(A4,qVI_23_minor);
 lineSchemePatch_5 := Scheme(A4,qVI_24_minor);
 lineSchemePatch_6 := Scheme(A4,qVI_34_minor);
 
+"Computing closure 1...";
 closure_1 := f12(lineSchemePatch_1);
-"closure_1";
+"Computing closure 2...";
 closure_2 := f13(lineSchemePatch_2);
-"closure_2";
+"Computing closure 3...";
 closure_3 := f14(lineSchemePatch_3);
-"closure_3";
+"Computing closure 4...";
 closure_4 := f23(lineSchemePatch_4);
-"closure_4";
+"Computing closure 5...";
 closure_5 := f24(lineSchemePatch_5);
-"closure_5";
+"Computing closure 6...";
 closure_6 := f34(lineSchemePatch_6);
-"closure_6";
 
 
 l := Union(Union(Union(Union(Union(closure_1,closure_2),closure_3),closure_4),closure_5),closure_6);
 
-"this is l",l;
-
 red_l := ReducedSubscheme(l);
 comp := IrreducibleComponents(red_l);
-sing_l := [SingularSubscheme(I): I in comp];
-sing_l;
+sing_l := [ReducedSubscheme(SingularSubscheme(I)): I in comp];
 "Dimension of l", Dimension(red_l);
 "Dimension,degree of components:",[[Dimension(comp[I]),Degree(comp[I]),Dimension(sing_l[I]),Degree(sing_l[I])]: I in [1..#comp]];
-
 
