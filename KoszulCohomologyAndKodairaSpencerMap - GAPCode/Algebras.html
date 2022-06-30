@@ -1,0 +1,747 @@
+<!doctype html>
+<html>
+    <head>
+       <p style="text-align: center; font-size: 40px;"> <b> <span style="color: red;">A</span>lgebras </b> </p> 
+      </head>
+<title>Zhang & Zhang Algebras</title>
+<style>
+
+.grid-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;
+  
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* 
+    .column{
+        float: left;
+        width: max-content;  
+        text-align: center;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        
+        
+    }
+
+    .box{
+        border-style: solid;
+        border-bottom: 1px;
+        width: auto;
+        height: fit-content;
+        padding: 30px
+        
+    }
+
+    .row{
+        content: "";
+        display: table;
+        clear: both;
+    } */
+
+</style>
+</head>
+<body>
+
+
+    <div class="grid-container">
+        
+        <div class="grid-item" style="background-color: lightgrey;"> <b>Zhang and Zhang </b></div> 
+        <div class="grid-item" style="background-color: lightgrey;"><b>Relations</b></div>
+        
+            <div class="grid-container" style="grid-template-columns: none; padding: 0px;">
+                <div class="grid-item" style="background-color: lightgrey;"> 
+                   <b>Dimension of Graded Components of A </b> 
+                </div>
+                <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                    <div class="grid-item" style="background-color: lightgrey;"><b>0</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>1</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>2</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>3</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>4</b></div>
+                </div>
+
+            </div>
+
+        
+            <div class="grid-container" style="grid-template-columns: none; padding: 0px;">
+                <div class="grid-item" style="background-color: lightgrey;"> 
+                   <b> Dimension of Graded Components of A^! </b> 
+                </div>
+                <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                    <div class="grid-item" style="background-color: lightgrey;"><b>0</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>1</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>2</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>3</b></div>
+                    <div class="grid-item" style="background-color: lightgrey;"><b>4</b></div>
+                </div>
+
+            </div>
+        
+            
+            <div class="grid-item" style="color: red;">A</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">B</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">C</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">D</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">E</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">F</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">G</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">H</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">I</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">J</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">K</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">L</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">M</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">N</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">O</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">P</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">Q</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">R</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">S</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">T</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">U</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">V</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">W</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">X</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">Y</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            <div class="grid-item" style="color: red;">Z</div>
+           
+            <div class="grid-item"> 
+                wx - xw <br>
+                zy - yz - y^2 <br>
+                yw - h &bull; wy <br>
+            </div>
+            
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">&nbsp 1</div>
+                <div class="grid-item">&nbsp 4</div>
+                <div class="grid-item">10</div>
+                <div class="grid-item">20</div>
+                <div class="grid-item">35</div>
+            </div>
+
+            <div class="grid-container" style="grid-template-columns: auto auto auto auto auto; padding: 0px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">1</div>
+            </div>
+
+            
+
+
+    </div>
+
+</body>
+</html>
