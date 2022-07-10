@@ -1,11 +1,8 @@
 restart
 
-
 loadPackage "AssociativeAlgebras"
 kk = QQ
 kk=ZZ/101
-
-
 
 --option 0
 
@@ -20,12 +17,12 @@ C=fourDimSklyanin(kk,{a,b,c,d})
 
 S = kk<|a,b,c,d|>
 I = ideal(
-    a*b+b*a,
-    a*c+c*a,
-    a*d+d*a,
-    b*c+c*b,
-    b*d+d*b,
-    c*d+d*c)
+    a*b+13*b*a,
+    a*c+17*c*a,
+    a*d+29*d*a,
+    b*c+7*c*b,
+    b*d+11*d*b,
+    c*d+43*d*c)
 C = S/I
 
 
@@ -44,9 +41,9 @@ d3 = rightKernel(d2)
 --d2 = lift(d2,S)
 --d3 = lift(d3,S)
 
-ncMatrixMult(d1,d2)
+--ncMatrixMult(d1,d2)
 
-ncMatrixMult(d0,d1)
+--ncMatrixMult(d0,d1)
 
 m3 = coefficients(transpose(d3))
 q1 = m3_1
@@ -113,55 +110,63 @@ t1 = map(S^1,S^6,g1)
 t2 = map(S^1,S^6,g2)
 
 
-(dS0*dS1) // (transpose(dS2*dS3))
+--ct1 = coefficients t1
+--ct2 = coefficients t2
 
 
-q1shifted = map(C^4,C^4,q1)
-q11shifted = map(C^4,C^4,q11)
-q1shifted//(q11shifted)
+--(dS0*dS1) // (transpose(dS2*dS3))
 
 
-m2 = coefficients(transpose(d2*d3))
+--q1shifted = map(C^4,C^4,t1)
+--q11shifted = map(C^4,C^4,t2)
+
+
+--q1shifted//(q11shifted)
+
+
+m2 = coefficients(t1)
 q2 = m2_1
 ord2 = m2_0
 
 ord2*ev(q2)
-transpose(d2*d3)
+transpose(dS2*dS3)
 
-m22 = coefficients(d0*d1)
+m22 = coefficients(t2)
 q22 = m22_1
 
 
 ord2*ev(q22)
-d0*d1
+dS0*dS1
 
 
-transpose(d2*d3)*inverse(ev(q2))
-d0*d1*inverse(ev(q22))
+--transpose(dS2*dS3)*ev(q22)
+--dS0*dS1*ev(q2)
 
 transpose(d2*d3)
 d0*d1*inverse(ev(q22))*ev(q2)
 
 
 
-Q2 = inverse(ev(q22))*ev(q2)
+Q2 = ev(q2)//ev(q22)
+
+--Q2 = inverse(ev(q22))*ev(q2)
 
 
 
 -- find Q3
 
-m3 = coefficients(transpose(d1*d2*d3))
+m3 = coefficients(transpose(dS1*dS2*dS3))
 q3 = m3_1
 ord3 = m3_0
 
 ord3*ev(q3)
-transpose(d1*d2*d3)
+transpose(dS1*dS2*dS3)
 
-m33 = coefficients(d0*d1*d2)
+m33 = coefficients(dS0*dS1*dS2)
 q33 = m33_1
 
 ord3*ev(q33)
-d0*d1*d2
+dS0*dS1*dS2
 
 
 
@@ -173,13 +178,13 @@ d0*d1*d2
 
 
 
-transpose(d1*d2*d3)
-d0*d1*d2*(ev(q3)//ev(q33))
+transpose(dS1*dS2*dS3)
+dS0*dS1*dS2*(ev(q3)//ev(q33))
 
 Q3 = ev(q3)//ev(q33)
 
 
-
+-----------------------------------------------------------------------------
 -- normalize resolution
 
 
