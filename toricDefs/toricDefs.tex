@@ -1,8 +1,10 @@
 
 \documentclass{article}
-\usepackage{amsmath}
+\usepackage{amsmath,tikz-cd}
 \newtheorem{proposition}{Proposition}
-\newtheorem{theorem}{theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{question}{Question}
 \begin{document}
 
 Let $k$ be a field and let $q_{ij} \in k$ for $1 \leq i < j \leq n$ and
@@ -14,7 +16,11 @@ $$x_jx_i - q_{ij} x_ix_j\quad \quad 1 \leq i < j \leq n.$$
 We let $A = A_Q$ be $S/I$.
 Note that $A$ has a $k$-basis of ordered monomials and so we have
 $$ A \simeq \bigoplus_{i_1\geq 0,\cdots, i_n \geq 0} k x_1^{i_1}\cdots x^{i_n}_n$$
-as vector spaces.
+as vector spaces.  We will compute the Hochschild cohomology
+$HH^2(A)_0$ using the degree zero part of the complex
+$$ A(1)^n_0 \stackrel{d_1}{\to} A(2)^{\binom{n}{2}}_0 \stackrel{d_2}{\to}
+  A(3)^{\binom{n}{3}}_0 $$
+    
 
 We will consider first order deformations of $A = S/I$.
 We consider $a_{ij} \in A$ with $1 \leq i < j \leq n$.
@@ -59,8 +65,7 @@ So we let
 $$\alpha_{ij} = \sum_{1 \leq \ell \leq m \leq n} \alpha_{ij}^{\ell m} x_\ell x_m$$
 be arbitrary quadratic elements of $A$.  We look at the above condition for these $\alpha$.
 So we have 
-$$ \sum(q_{ij}q_{ik}x_i\alpha_{jk}^{\ell m} x_\ell x_m+q_{ij}\alpha_{ik}^{\ell m} x_\ell x_mx_j+x_k\alpha_{ij}^{\ell m} x_\ell x_m) \\
-= \sum( q_{jk}q_{ik} \alpha_{ij}^{\ell m} x_\ell x_mx_k + q_{jk}x_j\alpha_{ik}^{\ell m} x_\ell x_m +\alpha_{jk}^{\ell m} x_\ell x_mx_i)$$
+$$ \sum(q_{ij}q_{ik}x_i\alpha_{jk}^{\ell m} x_\ell x_m+q_{ij}\alpha_{ik}^{\ell m} x_\ell x_mx_j+x_k\alpha_{ij}^{\ell m} x_\ell x_m) = $$ $$\sum( q_{jk}q_{ik} \alpha_{ij}^{\ell m} x_\ell x_mx_k + q_{jk}x_j\alpha_{ik}^{\ell m} x_\ell x_m +\alpha_{jk}^{\ell m} x_\ell x_mx_i)$$
 This gives cubic expressions in $A$, which we can separate in to different equations, for example:
 $$(q_{ij} q_{ik} \alpha_{jk}^{ii} -\alpha_{jk}^{ii}) x_i^3 = 0.$$
 On examining the coefficients of different monomials, we obtain the following
@@ -79,26 +84,60 @@ $$\begin{pmatrix}
     & & q_{ij}
 \end{pmatrix}
 \begin{pmatrix}
-  & q_{k \ell}-q_{kk} & q_{j\ell} - q_{jk} \\
+  0 & q_{k \ell}-q_{kk} & q_{jk} - q_{j\ell} \\
   q_{kk} - q_{k \ell} & 0 & q_{i\ell} - q_{ik} \\
-  q_{jk} - q_{j \ell} & q_{ik} - q_{i\ell} & 0
+  q_{j\ell} - q_{jk} & q_{ik} - q_{i\ell} & 0
 \end{pmatrix}
+\begin{pmatrix}
+  \alpha^{ik}_{i\ell} \\ \alpha^{jk}_{j\ell} \\  \alpha^{kk}_{k\ell}
+  \end{pmatrix} = 0
 $$
 
+Recall that a skew symmetric matrix always has even rank, so we always have a solution
+$$\begin{pmatrix}
+  \alpha^{ik}_{i\ell} \\ \alpha^{jk}_{j\ell} \\  \alpha^{kk}_{k\ell}
+\end{pmatrix}
+\in k
+\begin{pmatrix}
+  q_{i\ell} - q_{ik} \\ q_{j\ell} - q_{jk} \\ q_{k\ell} - q_{kk}
+\end{pmatrix}.$$
+These are all solutions when the matrix has rank two, otherwise the matrix must have rank zero, so $$ q_{i\ell} = q_{ik},q_{j\ell} = q_{jk}, q_{k\ell} = q_{kk}$$
+and there are no conditions on the corresponding  $\alpha^{ik}_{i\ell},\alpha^{jk}_{j\ell},\alpha^{kk}_{k\ell}.$  Hence we can conclude the following result.
+
+\begin{definition}
+  $Q$ is {\it generic} if 
+  $$q_{ij} \neq 0 \quad i<j$$
+  $$q_{ij}q_{ik} \neq q_{i\ell} \quad j<k, i \leq \ell.$$
+  $$ Q \notin V(q_{i\ell} = q_{ik},q_{j\ell} = q_{jk}, q_{k\ell} = q_{kk}).$$
+\end{definition}
+
+\begin{proposition}
+  Let $A_1$ be determined by the $(\alpha_{ij})$ then if $Q$ is generic $A_1$ is a flat deformation if and only if the $(\alpha_{ij})$ satisfy
+  $$ \alpha_{jk}^{i\ell} = 0 \quad \quad j < k, i \leq \ell,$$
+$$\begin{pmatrix}
+  \alpha^{ik}_{i\ell} \\ \alpha^{jk}_{j\ell} \\  \alpha^{kk}_{k\ell}
+\end{pmatrix}
+\in k
+\begin{pmatrix}
+  q_{i\ell} - q_{ik} \\ q_{j\ell} - q_{jk} \\ q_{k\ell} - q_{kk}
+\end{pmatrix}.$$
+\end{proposition}
+
+\begin{proposition}
+  If $Q$ above is not generic, then we have further deformations as follows:
+  \begin{itemize}
+    \item If $q_{ij}q_{ik} = q_{i\ell}$ then we allow $\alpha_{ik}^{i\ell} $ to be free.
+    \item If $q_{ij} = 0$ then we allow $\alpha_{jk}^{j\ell}, \alpha_{ik}^{i\ell}$ to be free.
+    \item If $q_{i\ell} = q_{ik},q_{j\ell} = q_{jk}, q_{k\ell} = q_{kk}$
+      then we allow $\alpha^{ik}_{i\ell} , \alpha^{jk}_{j\ell} ,  \alpha^{kk}_{k\ell}$ to be free.
+      \end{itemize}
+\end{proposition}
+
+\begin{question}
+  Does the family $A_Q$ meet other families of AS-regular algebras along the loci described above?
+  \end{question}
 
 
-
-
-
-
-
-
-
-We first study the deformations for generic $Q=(q_{ij})$.
-We will determine later that the exact conditions we need are:
-$$q_{ij} \neq 0 \quad \quad 1 \leq i < j \leq n.$$
-$$q_{ij}q_{ik} \neq q_{i\ell} \quad \quad \{ j,k \} \cap \{i,\ell\} = \emptyset $$
-$$ Q \notin V(q_{})$$
 Next, we will discuss infinitesimal automorphisms of first order deformations.  Hochschild cohomology captures infinitesimal deformation up infitesimal isomorphism.  Let $d_i \in A$ for $1 \leq i \leq n$ and write $\delta_i = \varepsilon d_i$.  We can carry out an infinitesimal change of coordinates that will change our presentation of $A_1$.
 Consider
 $$x_i \mapsto x_i+\delta_i.$$
@@ -116,14 +155,43 @@ $(a_{ij})$ and $(a'_{ij})$ are infinitesimally isomorphic
   if and only if
   \begin{enumerate}
   \item There is a commutative diagram
-    $$A_1 \to A \\
-    A_1' \to A $$
+   $$\begin{tikzcd}[column sep=small]
+A_1 \arrow{r}  \arrow{rd} 
+  & A_1' \arrow{d} \\
+    & A
+\end{tikzcd}$$
 \item There are $d_i \in A$ so that
   have $$
   a_{ij} = a_{ij}' + d_j x_i + x_j d_i -q_{ij}(d_i x_j + x_id_j).$$
   \end{enumerate}
 \end{proposition}
 
+We consider $\delta_i = \sum^j_i x_i$ and consider the infintesimal deformations we obtain by infintesimal change of coordinates, i.e. trivial deformations.
+We see the relations become
+$$(x_j+\delta_j) (x_i+\delta_i) = q_{ij}(x_i + \delta_i)(x_j+\delta_j)$$
+$$x_jx_i + \delta_jx_i + x_j\delta_i =q_{ij}(x_ix_j + \delta_ix_j + x_i\delta_j)$$
+$$x_jx_i = q_{ij} x_ix_J+q_{ij}\delta_ix_j + x_i\delta_j - \delta_jx_i + x_j\delta_i$$
+and so
+$$\alpha_{ij} =  q_{ij}\delta_ix_j + x_i\delta_j - \delta_jx_i + x_j\delta_i$$
+$$ \alpha_{ij} = q_{ij}\delta_i^kx_kx_j + x_i\delta_j^\ell x_\ell - \delta_j^\ell x_\ell x_i + x_j\delta_i^k x_k.$$
+$$ = \delta_j^k(q_{ik}-q_{ij})x_ix_k + \delta_i^\ell (q_{\ell j} -q_{ij})x_\ell x_j.$$
+
+\begin{theorem}
+  Let $A_Q$ be generic, then any deformation of $A_Q$ lies in the same family and so $A_Q$ forms a component of the moduli space of AS-regular algebras of dimension four.  This component possibly meets other components of the moduli space when we have some 
+  $$i<j \quad q_{ij} = 0$$
+  or $$i<j,k,\ell \quad \quad q_{ij}q_{ik} = q_{i\ell}$$
+  or
+ $$q_{i\ell} = q_{ik},q_{j\ell} = q_{jk}, q_{k\ell} = q_{kk}$$
+\end{theorem}
 
 
+\begin{question}
+Can we find other components of the moduli space that meet $A_Q$ in the loci described above?
+\end{question}
+\begin{question}
+  Does this theorem work for any $n$, not just $n=4$.
+\end{question}
+\begin{question}
+  The families of algebras described in Pym's thesis are all components.  How do they meet other components and each other?
+\end{question}
 \end{document}
