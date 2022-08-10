@@ -9,6 +9,7 @@
 \DeclareMathOperator{\PGL}{PGL}
 \DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Aut}{Aut}
 
 \begin{document}
 
@@ -222,12 +223,19 @@ The algebra defined by $x_jx_i = 0$ for $i<j$ is in $M_4$ and is not AS-regular,
 Changing coordinates gives an action of
 $\PGL_4V$ on this variety and the moduli (stack) space
 of algebras with this Hilbert series is
-$$ M_4 = A_4/\PGL_4V \subset \Gr(6,V\otimes V)/\PGL_4 V.$$
+$$ M_4 = A_4/\PGL_4V \subset \Gr(6,V\otimes V)/\PGL V.$$
 
 Note that the stabilzer of a point $A_0 \in M_4$ is $\Aut A/k^*$.
+Recall we always have that $k^* \subseteq \Aut A \subseteq \GL V.$
 
 Since deformation are flat, they preserve the Hilbert Series.  So Hochschild cohomlogy measures the tangent spaces of $M_4$.  More precisely, let $A_0 \in M_4$,
 then $$HH^2(A)_0 = T_{A_0} M_4$$ as $\Aut A/k^*$ equivariant vector spaces.
+
+We can rigidify these spaces.  Fist recall there are standard open subsets of the Grassmanian, with the simplest being the span of 
+$$( I_6 |P)$$ where
+$P$ is an arbitrary $6 \times 10$ matrix.
+
+
 
 We define $A^! = A^\perp$ and if
 $A$ is Koszul then we know futher that $A^! \simeq \Ext^*_A(k,k).$
