@@ -4,6 +4,7 @@ loadPackage "AssociativeAlgebras"
 
 -- compute invarants of the resolution as described in 
 --thesis "New Examples of four dimensional AS-regular algebras"
+-- examples at end
 
 invariantsFromResolution = (C -> (
 kk:=coefficientRing(C);	
@@ -47,7 +48,9 @@ ord2 := m2_0;
 m22 := coefficients(dS0*dS1);
 q22 := m22_1;
 
-Q2 := ev(q2)//ev(q22);
+evS:=map(kk,S,{0,0,0,0});
+
+Q2 := evS(q2)//evS(q22);
 
 -- find Q3
 
@@ -55,28 +58,33 @@ m32 := coefficients(transpose(dS1*dS2*dS3));
 q3 := m32_1;
 ord3 := m32_0;
 
-ord3*ev(q3);
+ord3*evS(q3);
 transpose(dS1*dS2*dS3);
 
 m33 := coefficients(dS0*dS1*dS2);
 q33 := m33_1;
 
-ord3*ev(q33);
+ord3*evS(q33);
 dS0*dS1*dS2;
 
 transpose(dS1*dS2*dS3);
-dS0*dS1*dS2*(ev(q3)//ev(q33));
+dS0*dS1*dS2*(evS(q3)//evS(q33));
 
-Q3 := ev(q3)//ev(q33);
+Q3 := evS(q3)//evS(q33);
 
 P := Q2;
 Q := Q3;
 (P,Q)))
 
 
+-- end of function
+
 --invariantsFromResolution(fourDimSklyanin(kk,{a,b,c,d}))
 
 kk = QQ
+
+-- or if you prefer
+
 kk=ZZ/101
 
 --option 0
@@ -84,6 +92,7 @@ kk=ZZ/101
 N = matrix{{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}}
 C = skewPolynomialRing(QQ,promote(N,QQ),{a,b,c,d})
 invariantsFromResolution(C)
+
 -- option 1,
 
 C=fourDimSklyanin(kk,{a,b,c,d})
