@@ -1001,7 +1001,7 @@ PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) # ci's and di's in complex fiel
 end;
 
 # Algebra with parameters q, b, c0, c1, c2
-VishalsAlgebra:= function(K, q, b, c0, c1, c2) $ all parameters in rational field
+VishalsAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
     local kQ, rels, A, x0, x1, x2, x3;
     kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
     x0:= kQ.x1; x1:= kQ.x2; x2:= kQ.x3; x3:= kQ.x4;
