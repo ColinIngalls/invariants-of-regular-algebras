@@ -981,6 +981,10 @@ AlgebraExample3point1Proof:= function( K, f, a ) #f and are nonzero elements of 
 	return [ A, kQ, rels ];
 end;
 
+#################################################################################################################################################################################
+
+# These algebras are taken from ...
+
 # Pym's Algebra S(2,3) 
 PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) # ci's and di's in complex field
 	b1 := -c3 - 2
