@@ -990,9 +990,9 @@ PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) # ci's and di's in complex fiel
 	b1 := -c3 - 2
 	b2 := -c1 - 2
 	b3 := -c2 - 2
-    local kQ, rels, S, x1, x2, x3, x4;
+    local kQ, rels, A, x0, x1, x2, x3;
     kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
-    x0:= kQ.x1; x1:= kQ.x2; x2:= kQ.x3; x3:= kQ.x4;
+    x0:= kQ.x0; x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3;
     rels:= [ ];
     rels[1]:= x0*x1 - x1*x0 - x1^2 - x1*(b1*x2 + c1*x3) - d1*x2*x3;
     rels[2]:= x0*x2 - x2*x0 - x2^2 - x2*(b2*x3 + c2*x1) - d2*x3*x1;
@@ -1008,7 +1008,7 @@ end;
 VishalsAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
     local kQ, rels, A, x0, x1, x2, x3;
     kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
-    x0:= kQ.x1; x1:= kQ.x2; x2:= kQ.x3; x3:= kQ.x4;
+    x0:= kQ.x0; x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3;
     rels:= [ ];
     rels[1]:= x2*x1 + q*x1*x2 + b*x0^2 + c0*x3^2;
     rels[2]:= x0*x2 + q*x2*x0 + b*x1^2 + c1*x3^2;
