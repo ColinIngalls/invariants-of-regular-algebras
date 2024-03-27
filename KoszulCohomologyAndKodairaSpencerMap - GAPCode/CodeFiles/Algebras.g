@@ -1007,9 +1007,9 @@ PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) # ci's and di's in complex fiel
 end;
 
 # Algebra with parameters q, b, c0, c1, c2
-VishalsAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
-    local kQ, rels, A, x0, x1, x2, x3;
-    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+NoNameAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
+    local kQ, rels, I, gb, A ;
+    kQ:= FreeKAlgebra(K, 4, "x");
     x0:= kQ.x0; x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3;
     rels:= [ ];
     rels[1]:= x2*x1 + q*x1*x2 + b*x0^2 + c0*x3^2;
@@ -1018,6 +1018,8 @@ VishalsAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational fiel
     rels[4]:= x0*x3 + x3*x0;
     rels[5]:= x1*x3 + x3*x1;
     rels[6]:= x2*x3 + x3*x2;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
     A:= kQ/rels ;
 	return [ A, kQ, rels ];
 end;
