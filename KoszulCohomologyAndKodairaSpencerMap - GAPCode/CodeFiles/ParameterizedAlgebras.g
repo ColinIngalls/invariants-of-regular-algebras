@@ -1056,3 +1056,33 @@ ParameterizedAlgebraL112:= function( K )	#p0 and p1 nonzero scalars in K, lambda
 #	A:= GBQuotient( kQ, rels );
 	return [ A, kQ, rels ];
 end;
+#######################################################################################################################################################################################################################################
+
+ParameterizedPymAlgebra:= function( K )
+  local PolyRing, kQ, b1, b2, b3, c1, c2, c3, d1, d2, d3, rels, I, gb, A ;
+  PolyRing:= FunctionField( K, [ "c1", "c2", "c3", "d1", "d2", "d3" ] ) ;
+  c1:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+  c2:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+  c3:= IndeterminatesOfFunctionField( PolyRing )[3] ;
+  d1:= IndeterminatesOfFunctionField( PolyRing )[4] ;
+  d2:= IndeterminatesOfFunctionField( PolyRing )[5] ;
+  d3:= IndeterminatesOfFunctionField( PolyRing )[6] ;
+    b1 := -c3 - 2 ;
+	b2 := -c1 - 2 ;
+	b3 := -c2 - 2 ;
+	kQ:= FreeKAlgebra(K, 4, "x");
+	x0:= kQ.x0; x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3;
+	rels:= [ ];
+	rels[1]:= x0*x1 - x1*x0 - x1^2 - x1*((-c3 -2)*x2 + c1*x3) - d1*x2*x3;
+	rels[2]:= x0*x2 - x2*x0 - x2^2 - x2*((-c1 - 2)*x3 + c2*x1) - d2*x3*x1;
+	rels[3]:= x0*x3 - x3*x0 - x3^2 - x3*((-c2 - 2)*x1 + c3*x2) - d3*x1*x2;
+	rels[4]:= x2*x3 - x3*x2;
+	rels[5]:= x3*x1 - x1*x3;
+	rels[6]:= x1*x2 - x2*x1;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
+	A:= kQ/rels ;
+	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
