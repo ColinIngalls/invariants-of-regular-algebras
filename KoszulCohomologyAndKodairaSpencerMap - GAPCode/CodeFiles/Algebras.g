@@ -1024,6 +1024,63 @@ NoNameAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
 	return [ A, kQ, rels ];
 end;
 
+# Kirkman Algebras
+KirkmanAlgebraR:= function(K)
+    local kQ, rels, I, gb, A ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	rels:= [ ] ;
+	rels[1]:= x1*x2 + x2*x1 ;
+    rels[2]:= x1*x3 + x4*x2 ;
+    rels[3]:= x1*x4 - x3*x2 ;
+    rels[4]:= x2*x3 - x4*x1 ;
+    rels[5]:= x2*x4 + x3*x1 ;
+    rels[6]:= x3*x4 + x4*x3 ;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
+    #  A:= kQ/rels ;
+	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ] ;
+end;
+
+
+KirkmanAlgebraS:= function(K)
+    local kQ, rels, I, gb, A ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	rels:= [ ] ;
+	rels[1]:= x1*x2 - x3^2 ;
+    rels[2]:= x1*x3 - x2*x4 ;
+    rels[3]:= x1*x4 - x4*x2 ;
+    rels[4]:= x2*x3 - x3*x1 ;
+    rels[5]:= x3*x2 - x4*x1 ;
+    rels[6]:= x2*x1 - x4^2 ;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
+    #  A:= kQ/rels ;
+	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ] ;
+end;
+
+
+KirkmanAlgebraT:= function(K)
+    local kQ, rels, I, gb, A ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	rels:= [ ] ;
+	rels[1]:= x1*x2 - x3^2 ;
+    rels[2]:= x1*x3 - x2*x4 ;
+    rels[3]:= x1*x4 + x4*x2 ;
+    rels[4]:= x2*x3 - x3*x1 ;
+    rels[5]:= x3*x2 - x4*x1 ;
+    rels[6]:= x2*x1 + x4^2 ;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
+    #  A:= kQ/rels ;
+	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ] ;
+end;
+
+
+
+
 #################################################################################################################################################################################
 
 #The next algebras are taken from the paper "Poisson Structures and Lie Algebroids in Complex Geometry", by Brent Pym
