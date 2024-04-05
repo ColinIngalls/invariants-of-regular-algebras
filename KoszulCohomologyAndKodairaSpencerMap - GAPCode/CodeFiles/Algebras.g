@@ -1026,7 +1026,7 @@ end;
 
 # Kirkman Algebras
 KirkmanAlgebraR:= function(K)
-    local kQ, rels, I, gb, A ;
+    local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
 	kQ:= FreeKAlgebra( K, 4, "x" ) ;
 	rels:= [ ] ;
 	rels[1]:= kQ.x1*kQ.x2 + kQ.x2*kQ.x1 ;
@@ -1044,15 +1044,15 @@ end;
 
 
 KirkmanAlgebraS:= function(K)
-    local kQ, rels, I, gb, A ;
+    local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
 	kQ:= FreeKAlgebra( K, 4, "x" ) ;
 	rels:= [ ] ;
-	rels[1]:= kQ.x1*kQ.x2 - kQ.x3^2 ;
+	rels[1]:= kQ.x1*kQ.x2 - kQ.x3*kQ.x3 ;
     rels[2]:= kQ.x1*kQ.x3 - kQ.x2*kQ.x4 ;
     rels[3]:= kQ.x1*kQ.x4 - kQ.x4*kQ.x2 ;
     rels[4]:= kQ.x2*kQ.x3 - kQ.x3*kQ.x1 ;
     rels[5]:= kQ.x3*kQ.x2 - kQ.x4*kQ.x1 ;
-    rels[6]:= kQ.x2*kQ.x1 - kQ.x4^2 ;
+    rels[6]:= kQ.x2*kQ.x1 - kQ.x4*kQ.x4 ;
 	I:= Ideal( kQ, rels );
 	gb:= GroebnerBasis( I, rels);
     #  A:= kQ/rels ;
@@ -1062,15 +1062,15 @@ end;
 
 
 KirkmanAlgebraT:= function(K)
-    local kQ, rels, I, gb, A ;
+    local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
 	kQ:= FreeKAlgebra( K, 4, "x" ) ;
 	rels:= [ ] ;
-	rels[1]:= kQ.x1*kQ.x2 - kQ.x3^2 ;
+	rels[1]:= kQ.x1*kQ.x2 - kQ.x3*kQ.x3 ;
     rels[2]:= kQ.x1*kQ.x3 - kQ.x2*kQ.x4 ;
     rels[3]:= kQ.x1*kQ.x4 + kQ.x4*kQ.x2 ;
     rels[4]:= kQ.x2*kQ.x3 - kQ.x3*kQ.x1 ;
     rels[5]:= kQ.x3*kQ.x2 - kQ.x4*kQ.x1 ;
-    rels[6]:= kQ.x2*kQ.x1 + kQ.x4^2 ;
+    rels[6]:= kQ.x2*kQ.x1 + kQ.x4*kQ.x4 ;
 	I:= Ideal( kQ, rels );
 	gb:= GroebnerBasis( I, rels);
     #  A:= kQ/rels ;
