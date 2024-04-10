@@ -70,11 +70,13 @@ dS0*dS1*dS2;
 transpose(dS1*dS2*dS3);
 dS0*dS1*dS2*(evS(q3)//evS(q33));
 
+w = dS0*dS1*dS2*dS3;
+
 Q3 := evS(q3)//evS(q33);
 
 P := Q2;
 Q := Q3;
-(P,Q)))
+(P,Q,w)))
 
 
 -- end of function
@@ -89,7 +91,11 @@ kk=ZZ/101
 
 --option 0
 
-N = matrix{{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}}
+N = matrix{
+    {1,11,7,13},
+    {1/11,1,2,5},
+    {1/7,1/2,1,3},
+    {1/13,1/5,1/3,1}}
 C = skewPolynomialRing(QQ,promote(N,QQ),{a,b,c,d})
 invariantsFromResolution(C)
 
