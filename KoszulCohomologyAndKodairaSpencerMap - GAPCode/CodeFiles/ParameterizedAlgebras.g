@@ -1059,7 +1059,8 @@ end;
 #######################################################################################################################################################################################################################################
 
 ParameterizedPymAlgebra:= function( K )
-  local PolyRing, kQ, b1, b2, b3, c1, c2, c3, d1, d2, d3, rels, I, gb, A ;
+  local PolyRing, kQ, b1, b2, b3, c1, c2, c3, d1, d2, d3, rels, I, gb, A,
+    x0,x1,x2,x3;
   PolyRing:= FunctionField( K, [ "c1", "c2", "c3", "d1", "d2", "d3" ] ) ;
   c1:= IndeterminatesOfFunctionField( PolyRing )[1] ;
   c2:= IndeterminatesOfFunctionField( PolyRing )[2] ;
