@@ -986,7 +986,8 @@ end;
 # These algebras are taken from ...
 
 # Pym's Algebra S(2,3) 
-PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) # ci's and di's in complex field
+PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) 
+# ci's and di's in complex field
     local kQ, b1, b2, b3, rels, I, gb, A, x0, x1, x2, x3, x4 ;
 	b1 := -c3 - 2 ;
 	b2 := -c1 - 2 ;
@@ -1045,7 +1046,8 @@ end;
 
 KirkmanAlgebraS:= function(K)
     local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
-	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	kQ:= FreeKAlgebraNoGeneratorNames( K, 4, "x" ) ;
+	#x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
 	rels:= [ ] ;
 	rels[1]:= kQ.x1*kQ.x2 - kQ.x3*kQ.x3 ;
     rels[2]:= kQ.x1*kQ.x3 - kQ.x2*kQ.x4 ;
@@ -1054,10 +1056,10 @@ KirkmanAlgebraS:= function(K)
     rels[5]:= kQ.x3*kQ.x2 - kQ.x4*kQ.x1 ;
     rels[6]:= kQ.x2*kQ.x1 - kQ.x4*kQ.x4 ;
 	I:= Ideal( kQ, rels );
-	gb:= GroebnerBasis( I, rels);
+#	gb:= GroebnerBasis( I, rels);
     #  A:= kQ/rels ;
-	A:= GBQuotient( kQ, rels );
-	return [ A, kQ, rels ] ;
+#	A:= GBQuotient( kQ, rels );
+	return [0,  kQ, rels ] ;
 end;
 
 
