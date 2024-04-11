@@ -1074,10 +1074,10 @@ KirkmanAlgebraT:= function(K)
     rels[5]:= kQ.x3*kQ.x2 - kQ.x4*kQ.x1 ;
     rels[6]:= kQ.x2*kQ.x1 + kQ.x4*kQ.x4 ;
 	I:= Ideal( kQ, rels );
-	gb:= GroebnerBasis( I, rels);
+#	gb:= GroebnerBasis( I, rels);
     #  A:= kQ/rels ;
-	A:= GBQuotient( kQ, rels );
-	return [ A, kQ, rels ] ;
+#	A:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ] ;
 end;
 
 
