@@ -2,9 +2,48 @@ restart
 
 loadPackage "AssociativeAlgebras"
 
+kk = ZZ/101
+R=kk[a_(0,0,0)..a_(3,3,5),b_(0,0)..b_(5,5)]
+S=R<|x_0,x_1,x_2,x_3|>
+gg = matrix {generators S}
+P_0= genericMatrix(R,a_(0,0,0),4,6)
+P_1= genericMatrix(R,a_(1,0,0),4,6)
+P_2= genericMatrix(R,a_(2,0,0),4,6)
+P_3= genericMatrix(R,a_(3,0,0),4,6)
+
+
+B = genericMatrix(R,b_(0,0),6,6)
+entr = ((0,0)..(3,5))/(v->sum(0..3,j->(a_(j,v_0,v_1)*x_j)))
+
+Pt = map(S^6,S^6,{{0, 0, 0, 0, 0, 1}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 1, 0,
+      0}, {0, 0, 1, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}})
+
+
+PP=map(S^4,S^6,(i,j)->sum(0..3,k->(a_(k,i,j)*x_k)))
+pot = gg*PP*B*(transpose PP)*(transpose gg)
+
+sigma = map(S,S,{x_3,x_0,x_1,x_2})
+
+sigma(pot)
+
+cfs  = sub((coefficients(pot-sigma(pot)))_1,R);
+
+I = ideal cfs
+
+
+slice = ideal ( (0..115)/(i->random(1,R)));
+
+
+dim slice
+degree slice
+dim(I+slice)
+
+dim I
 -- compute invarants of the resolution as described in 
 --thesis "New Examples of four dimensional AS-regular algebras"
 -- examples at end
+
+
 
 invariantsFromResolution = (C -> (
 kk:=coefficientRing(C);	
@@ -96,12 +135,6 @@ N = matrix{
     {1/11,1,2,5},
     {1/7,1/2,1,3},
     {1/13,1/5,1/3,1}}
-
-N = matrix{
-    {1,-1,-1,-1},
-    {-1,1,-1,-1},
-    {-1,-1,1,-1},
-    {-1,-1,-1,1}}
 C = skewPolynomialRing(QQ,promote(N,QQ),{a,b,c,d})
 invariantsFromResolution(C)
 
@@ -122,14 +155,5 @@ I = ideal(
     c*d+43*d*c)
 C = S/I
 
-op = invariantsFromResolution(C)
+invariantsFromResolution(C)
 
-S = kk<|a,b,c,d|>
-I = ideal(
-    a*b+b*a+11*a^2+13*b^2+17*c^2+25*d^2,
-    a*c+c*a+45*a^2+23*b^2+47*c^2+24*d^2,
-    a*d+d*a+14*a^2+53*b^2+27*c^2+23*d^2,
-    b*c+c*b+10*a^2+43*b^2+37*c^2+22*d^2,
-    b*d+d*b+77*a^2+83*b^2+47*c^2+21*d^2,
-    c*d+d*c)
-C = S/I
