@@ -1009,20 +1009,20 @@ end;
 
 # Algebra with parameters q, b, c0, c1, c2
 NoNameAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
-    local kQ, rels, I, gb, A, x0, x1, x2, x3;
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
     kQ:= FreeKAlgebra(K, 4, "x");
-    x0:= kQ.x0; x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3;
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
     rels:= [ ];
-    rels[1]:= x2*x1 + q*x1*x2 + b*x0^2 + c0*x3^2;
-    rels[2]:= x0*x2 + q*x2*x0 + b*x1^2 + c1*x3^2;
-    rels[3]:= x1*x0 + q*x0*x1 + b*x2^2 + c2*x3^2;
-    rels[4]:= x0*x3 + x3*x0;
+    rels[1]:= x2*x1 + q*x1*x2 + b*x4^2 + c0*x3^2;
+    rels[2]:= x4*x2 + q*x2*x4 + b*x1^2 + c1*x3^2;
+    rels[3]:= x1*x4 + q*x4*x1 + b*x2^2 + c2*x3^2;
+    rels[4]:= x4*x3 + x3*x4;
     rels[5]:= x1*x3 + x3*x1;
     rels[6]:= x2*x3 + x3*x2;
-	I:= Ideal( kQ, rels );
-	gb:= GroebnerBasis( I, rels);
-    A:= kQ/rels ;
-	return [ A, kQ, rels ];
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+#    A:= kQ/rels ;
+	return [0, kQ, rels ];
 end;
 
 # Kirkman Algebras
