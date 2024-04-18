@@ -3,7 +3,7 @@ restart
 loadPackage "AssociativeAlgebras"
 
 kk = ZZ/101
-R=kk[a_(0,0,0)..a_(3,3,5),b_(0,0)..b_(5,5)]
+R=kk[a_(0,0,0)..a_(3,3,5),b_(0,0,0)..b_(3,3,5)]
 S=R<|x_0,x_1,x_2,x_3|>
 gg = matrix {generators S}
 P_0= genericMatrix(R,a_(0,0,0),4,6)
@@ -20,7 +20,9 @@ Pt = map(S^6,S^6,{{0, 0, 0, 0, 0, 1}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 1, 0,
 
 
 PP=map(S^4,S^6,(i,j)->sum(0..3,k->(a_(k,i,j)*x_k)))
-pot = gg*PP*B*(transpose PP)*(transpose gg)
+
+PPb=map(S^4,S^6,(i,j)->sum(0..3,k->(b_(k,i,j)*x_k)))
+pot = gg*PP*(transpose PPb)*(transpose gg)
 
 sigma = map(S,S,{x_3,x_0,x_1,x_2})
 
@@ -31,7 +33,7 @@ cfs  = sub((coefficients(pot-sigma(pot)))_1,R);
 I = ideal cfs
 
 
-slice = ideal ( (0..115)/(i->random(1,R)));
+slice = ideal ( (0..150)/(i->random(1,R)));
 
 
 dim slice
