@@ -1,4 +1,6 @@
-kk=QQ
+restart
+
+kk=ZZ/101
 
 loadPackage "AssociativeAlgebras"
 
