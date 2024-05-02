@@ -118,13 +118,13 @@ invariantsFromResolution(C)
 
 -- option 2, 
 
-S = kk<|a,b,c,d|>
+S = kk <|a,b,c,d|>
 I = ideal(
     a*b+13*b*a,
     a*c+17*c*a,
     a*d+29*d*a,
     b*c+7*c*b,
-    b*d+11*d*b+45*a*c,
+    b*d+11*d*b,
     c*d+13*7*d*c)
 C = S/I
 
@@ -160,4 +160,11 @@ I = ideal(
     b*c+c*b+10*a^2+43*b^2+37*c^2+22*d^2,
     b*d+d*b+77*a^2+83*b^2+47*c^2+21*d^2,
     c*d+d*c)
+
+
 C = S/I
+Csh = homogDual(C)
+(0..4)/(i->rank source ncBasis(i,Csh))
+ell = (ncBasis(1,Csh)*random(kk^4))_0
+leftEll = directSum(apply(-1..4,i->leftMultiplicationMap(ell,i,i+1)))
+(1..5)/(j->rank (leftEll^j))
