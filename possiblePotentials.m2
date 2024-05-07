@@ -38,8 +38,10 @@ w = x_0^4+x_1^4+x_2^4+x_3^4 --1,4,4,4,4 -CY
 
 cfs = coefficients w;
 mono=cfs_0_199_0
-lx0 = leftMultiplicationMap(x_0,3,4)
-(transpose lx0)*(ncBasis(4,S))
+lx0 = lefttMultiplicationMap(x_0,3,4)
+lx0*(transpose ncBasis(3,S))
+
+
 
 rels = ((0,0)..(3,3))/((i,j)->(dx_i dx_j w))
 A = S/(ideal rels)

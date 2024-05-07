@@ -29,7 +29,7 @@ Q1:=ev(q1)*inverse(ev(q11));
 -- We now normalize, change basis so the new Q1 = Id
 
 d0 := dd0*unit(Q1);
-d1 := unit(inverse(Q1))*dd1;
+ d1 := unit(inverse(Q1))*dd1;
 d2 := dd2;
 d3 := dd3;
 
@@ -166,5 +166,6 @@ C = S/I
 Csh = homogDual(C)
 (0..4)/(i->rank source ncBasis(i,Csh))
 ell = (ncBasis(1,Csh)*random(kk^4))_0
+
 leftEll = directSum(apply(-1..4,i->leftMultiplicationMap(ell,i,i+1)))
 (1..5)/(j->rank (leftEll^j))
