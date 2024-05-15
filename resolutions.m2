@@ -33,13 +33,27 @@ d0 := dd0*unit(Q1);
 d2 := dd2;
 d3 := dd3;
 
+-- Now change basis so entries of d0 are new x_i
+
 -- Find Q2
 S := ambient C;
 use S;
-dS2 := lift(d2,S);
-dS3 := lift(d3,S);
-dS0 := lift(d0,S);
-dS1 := lift(d1,S);
+dSt2 := lift(d2,S);
+dSt3 := lift(d3,S);
+dSt0 := lift(d0,S);
+dSt1 := lift(d1,S);
+
+
+phi = map(S,S,dSt0)
+invphimat = inverse ev((coefficients dSt0)_1)
+invphi = map(S,S,transpose( invphimat*(transpose matrix {gens S})))
+
+
+dS2 := invphi(dSt2);
+dS3 := invphi(dSt3);
+dS0 := invphi(dSt0);
+dS1 := invphi(dSt1);
+
 
 m2 := coefficients(transpose(dS2*dS3));
 q2 := m2_1;
