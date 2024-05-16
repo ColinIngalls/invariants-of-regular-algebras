@@ -45,8 +45,8 @@ dSt1 := lift(d1,S);
 
 
 phi = map(S,S,dSt0)
-invphimat = inverse ev((coefficients dSt0)_1)
-invphi = map(S,S,transpose( invphimat*(transpose matrix {gens S})))
+invphimat = transpose inverse ev((coefficients dSt0)_1)
+invphi = map(S,S,transpose (invphimat*(transpose matrix {gens S})))
 
 
 dS2 := invphi(dSt2);
@@ -166,6 +166,8 @@ C=S/I
 
 op = invariantsFromResolution(C)
 
+
+kk=ZZ/101
 S = kk<|a,b,c,d|>
 I = ideal(
     a*b+b*a+11*a^2+13*b^2+17*c^2+25*d^2,
@@ -173,6 +175,13 @@ I = ideal(
     a*d+d*a+14*a^2+53*b^2+27*c^2+23*d^2,
     b*c+c*b+10*a^2+43*b^2+37*c^2+22*d^2,
     b*d+d*b+77*a^2+83*b^2+47*c^2+21*d^2,
+    c*d+d*c)
+I = ideal( 
+    a*b+b*a+11*c^2,
+    a*c+c*a+7*d^2,
+    a*d+d*a,
+    b*c+c*b,
+    b*d+d*b,
     c*d+d*c)
 
 
