@@ -112,3 +112,9 @@ C = S/I
 
 invariantsFromResolution(C)
 
+
+
+
+
+
+
