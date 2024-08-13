@@ -981,6 +981,172 @@ AlgebraExample3point1Proof:= function( K, f, a ) #f and are nonzero elements of 
 	return [ A, kQ, rels ];
 end;
 
+#################################################################################################################################################################################
+
+# These algebras are taken from ...
+
+# Pym's Algebra S(2,3) 
+PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3) 
+# ci's and di's in complex field
+    local kQ, b1, b2, b3, rels, I, gb, A, x1, x2, x3, x4 ;
+	b1 := -c3 - 2 ;
+	b2 := -c1 - 2 ;
+	b3 := -c2 - 2 ;
+    kQ:= FreeKAlgebra(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4 ; 
+    rels:= [ ];
+    rels[1]:= x4*x1 - x1*x4 - x1^2 - x1*((-c3 -2)*x2 + c1*x3) - d1*x2*x3 ;
+    rels[2]:= x4*x2 - x2*x4 - x2^2 - x2*((-c1 - 2)*x3 + c2*x1) - d2*x3*x1 ;
+    rels[3]:= x4*x3 - x3*x4 - x3^2 - x3*((-c2 - 2)*x1 + c3*x2) - d3*x1*x2 ;
+    rels[4]:= x2*x3 - x3*x2;
+    rels[5]:= x3*x1 - x1*x3;
+    rels[6]:= x1*x2 - x2*x1;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+# Algebra with parameters q, b, c0, c1, c2
+NoNameAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
+    local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
+    kQ:= FreeKAlgebra( K, 4, "x" ) ;
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4 ;
+    rels:= [ ] ;
+    rels[1]:= x2*x1 + q*x1*x2 + b*x4^2 + c0*x3^2 ;
+    rels[2]:= x4*x2 + q*x2*x4 + b*x1^2 + c1*x3^2 ;
+    rels[3]:= x1*x4 + q*x4*x1 + b*x2^2 + c2*x3^2 ;
+    rels[4]:= x4*x3 + x3*x4 ;
+    rels[5]:= x1*x3 + x3*x1 ;
+    rels[6]:= x2*x3 + x3*x2 ;
+#    I:= Ideal( kQ, rels ) ;
+#	 gb:= GroebnerBasis( I, rels) ;
+#    A:= kQ/rels ;
+#    A:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+# Kirkman Algebras
+KirkmanAlgebraR:= function(K)
+    local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	rels:= [ ] ;
+	rels[1]:= kQ.x1*kQ.x2 + kQ.x2*kQ.x1 ;
+    rels[2]:= kQ.x1*kQ.x3 + kQ.x4*kQ.x2 ;
+    rels[3]:= kQ.x1*kQ.x4 - kQ.x3*kQ.x2 ;
+    rels[4]:= kQ.x2*kQ.x3 - kQ.x4*kQ.x1 ;
+    rels[5]:= kQ.x2*kQ.x4 + kQ.x3*kQ.x1 ;
+    rels[6]:= kQ.x3*kQ.x4 + kQ.x4*kQ.x3 ;
+	I:= Ideal( kQ, rels );
+	gb:= GroebnerBasis( I, rels);
+    #  A:= kQ/rels ;
+	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ] ;
+end;
+
+
+KirkmanAlgebraS:= function(K)
+    local kQ, rels, I, gb, A, x1, x2, x3, x4 ;
+	kQ:= FreeKAlgebraNoGeneratorNames( K, 4, "x" ) ;
+	#x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ] ;
+	rels[1]:= kQ.x1*kQ.x2 - kQ.x3*kQ.x3 ;
+    rels[2]:= kQ.x1*kQ.x3 - kQ.x2*kQ.x4 ;
+    rels[3]:= kQ.x1*kQ.x4 - kQ.x4*kQ.x2 ;
+    rels[4]:= kQ.x2*kQ.x3 - kQ.x3*kQ.x1 ;
+    rels[5]:= kQ.x3*kQ.x2 - kQ.x4*kQ.x1 ;
+    rels[6]:= kQ.x2*kQ.x1 - kQ.x4*kQ.x4 ;
+	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    #  A:= kQ/rels ;
+#	A:= GBQuotient( kQ, rels );
+	return [0,  kQ, rels ] ;
+end;
+
+
+KirkmanAlgebraT:= function(K)
+    local kQ, rels, I, gb, A, x0, x1, x2, x3, x4 ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	rels:= [ ] ;
+	rels[1]:= kQ.x1*kQ.x2 - kQ.x3*kQ.x3 ;
+    rels[2]:= kQ.x1*kQ.x3 - kQ.x2*kQ.x4 ;
+    rels[3]:= kQ.x1*kQ.x4 + kQ.x4*kQ.x2 ;
+    rels[4]:= kQ.x2*kQ.x3 - kQ.x3*kQ.x1 ;
+    rels[5]:= kQ.x3*kQ.x2 - kQ.x4*kQ.x1 ;
+    rels[6]:= kQ.x2*kQ.x1 + kQ.x4*kQ.x4 ;
+	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    #  A:= kQ/rels ;
+#	A:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ] ;
+end;
+
+###############################################################################################################################################################################################
+
+# Examples of Cassidy-Vancliff Graded Clifford Algebras and of Complete Intersection
+
+ 
+CassidyVancliff5point1:= function( K, gamma ) #Need alpha^2 = -1 = beta^2 in K with alpha,beta and gamma not equal 0. For instance, K = Z_101 and alpha = beta = 10
+	local kQ, alpha, beta, rels, A, x1, x2, x3, x4, I, gb;
+	kQ:= FreeKAlgebraNoGeneratorNames( GaussianRationals, 4, "x" );
+	alpha:= E(4);
+	beta:= E(4);
+	rels:= [];
+	rels[1]:= kQ.x4*kQ.x1 - alpha*kQ.x1*kQ.x4 ;
+	rels[2]:= kQ.x3*kQ.x2 - beta*kQ.x2*kQ.x3 ;
+#
+	rels[3]:= kQ.x3*kQ.x3 - kQ.x1*kQ.x1 ;
+	rels[4]:= kQ.x4*kQ.x4 - kQ.x2*kQ.x2 ;
+	rels[5]:= kQ.x3*kQ.x1 - kQ.x1*kQ.x3 + kQ.x2*kQ.x2 ;
+	rels[6]:= kQ.x4*kQ.x2 - kQ.x2*kQ.x4 + gamma^2*kQ.x1^2 ;
+	# I:= Ideal( kQ, rels );
+	# gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+	# A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
+
+CassidyVancliff5point2:= function( K, alpha1, alpha2, beta1, beta2)	# Need alpha2*(alpha2-1)=0, (alpha1^2 + alpha2^2 * beta1)(beta1^2 + beta2^2 * alpha1) neq 0
+																											
+	local kQ, rels, x1, x2, x3, x4, I, gb, A;
+	kQ:= FreeKAlgebra( K, 4, "x" );
+#	p:= E(4);
+	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ];
+	rels[1]:= x3*x1 + x1*x3 - beta2*x2^2 ;
+	rels[2]:= x4*x1 + x1*x4 - alpha2*x3^2 ;
+	rels[3]:= x2*x3 - x3*x2 ;
+	rels[4]:= x4*x4 - x2*x2 ;
+	rels[5]:= x4*x2 + x2*x4 - x3^2 ;
+	rels[6]:= alpha1*x3^2 + beta1*x2^2 - x1^2 ;
+	#	I:= Ideal( kQ, rels );
+	#	gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+	#	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
+
+CassidyVancliff5point3:= function( K, u13, u14, u24, u34 )	# Need u34^2 = 1, u34 = u24 = u14^2 = u13^2
+																											
+	local kQ, rels, x1, x2, x3, x4, I, gb, A;
+	kQ:= FreeKAlgebra( K, 4, "x" );
+	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ];
+	rels[1]:= x1*x3 + u13*x3*x1 ;
+	rels[2]:= x1*x4 + u14*x4*x1 ;
+	rels[3]:= x3*x4 + u34*x4*x3 ;
+	rels[4]:= x4*x4 - x2*x2 ;
+	rels[5]:= x2*x3 + x3*x2 + x4^2 ;
+	rels[6]:= x2*x4 + u24*x4*x2 + x1^2 ;
+	#	I:= Ideal( kQ, rels );
+	#	gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+	#	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
 
 
 #################################################################################################################################################################################
@@ -988,7 +1154,7 @@ end;
 #The next algebras are taken from the paper "Poisson Structures and Lie Algebroids in Complex Geometry", by Brent Pym
 
 AlgebraL112:= function( K, p0, p1, lambda )	#p0 and p1 nonzero scalars in K, lambda in K
-	local kQ, rels, x1, x2, x3, x4, I, gb, A ;
+	local kQ, rels, x0, x1, x2, x3, x4, I, gb, A ;
 	kQ:= FreeKAlgebra( K, 4, "x" ) ;
 	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
 	rels:= [ ] ;
@@ -1004,6 +1170,8 @@ AlgebraL112:= function( K, p0, p1, lambda )	#p0 and p1 nonzero scalars in K, lam
 #	A:= GBQuotient( kQ, rels );
 	return [ A, kQ, rels ];
 end;
+
+
 
 
 

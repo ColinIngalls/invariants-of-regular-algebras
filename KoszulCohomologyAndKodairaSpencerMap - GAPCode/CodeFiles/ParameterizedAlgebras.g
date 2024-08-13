@@ -1056,3 +1056,139 @@ ParameterizedAlgebraL112:= function( K )	#p0 and p1 nonzero scalars in K, lambda
 #	A:= GBQuotient( kQ, rels );
 	return [ A, kQ, rels ];
 end;
+#######################################################################################################################################################################################################################################
+
+ParameterizedPymAlgebra:= function( K )
+  local PolyRing, kQ, b1, b2, b3, c1, c2, c3, d1, d2, d3, rels, I, gb, A, x1, x2, x3, x4 ;
+  PolyRing:= FunctionField( K, [ "c1", "c2", "c3", "d1", "d2", "d3" ] ) ;
+  c1:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+  c2:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+  c3:= IndeterminatesOfFunctionField( PolyRing )[3] ;
+  d1:= IndeterminatesOfFunctionField( PolyRing )[4] ;
+  d2:= IndeterminatesOfFunctionField( PolyRing )[5] ;
+  d3:= IndeterminatesOfFunctionField( PolyRing )[6] ;
+       b1 := -c3 - 2 ;
+	   b2 := -c1 - 2 ;
+	   b3 := -c2 - 2 ;
+	   kQ:= FreeKAlgebra( PolyRing, 4, "x" ) ;
+	   x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4 ;
+	   rels:= [ ];
+       rels[1]:= x4*x1 - x1*x4 - x1^2 - x1*((-c3 -2)*x2 + c1*x3) - d1*x2*x3 ;
+       rels[2]:= x4*x2 - x2*x4 - x2^2 - x2*((-c1 - 2)*x3 + c2*x1) - d2*x3*x1 ;
+       rels[3]:= x4*x3 - x3*x4 - x3^2 - x3*((-c2 - 2)*x1 + c3*x2) - d3*x1*x2 ;
+       rels[4]:= x2*x3 - x3*x2;
+       rels[5]:= x3*x1 - x1*x3;
+       rels[6]:= x1*x2 - x2*x1;
+#	   I:= Ideal( kQ, rels ) ;
+#	   gb:= GroebnerBasis( I, rels);
+	   A:= kQ/rels ;
+	   return [ A, kQ, rels ];
+end;
+
+
+ParameterizedNoNameAlgebra:= function( K ) 
+    local PolyRing, kQ, q, b, c0, c1, c2, rels, I, gb, A, x1, x2, x3, x4 ;
+	PolyRing:= FunctionField( K, [ "q", "b", "c0", "c1", "c2" ] ) ;
+    q:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+    b:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+    c0:= IndeterminatesOfFunctionField( PolyRing )[3] ;
+    c1:= IndeterminatesOfFunctionField( PolyRing )[4] ;
+    c2:= IndeterminatesOfFunctionField( PolyRing )[5] ;
+    kQ:= FreeKAlgebra( PolyRing, 4, "x" ) ;
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4 ;
+    rels:= [ ] ;
+    rels[1]:= x2*x1 + q*x1*x2 + b*x4^2 + c0*x3^2 ;
+    rels[2]:= x4*x2 + q*x2*x4 + b*x1^2 + c1*x3^2 ;
+    rels[3]:= x1*x4 + q*x4*x1 + b*x2^2 + c2*x3^2 ;
+    rels[4]:= x4*x3 + x3*x4 ;
+    rels[5]:= x1*x3 + x3*x1 ;
+    rels[6]:= x2*x3 + x3*x2 ;
+#    I:= Ideal( kQ, rels ) ;
+#	 gb:= GroebnerBasis( I, rels) ;
+#    A:= kQ/rels ;
+#    A:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+
+##########################################################################################################################################################################################################################################
+
+# Examples of Cassidy-Vancliff Graded Clifford Algebras and of Complete Intersection
+
+ParameterizedCassidyVancliff5point1:= function( K ) #Need alpha^2 = -1 = beta^2 in K with alpha,beta and gamma not equal 0. For instance, K = Z_101 and alpha = beta = 10
+	local PolyRing, kQ, alpha, beta, gamma, rels, A, x1, x2, x3, x4, I, gb;
+	PolyRing:= FunctionField( GaussianRationals, ["gamma"] );
+    gamma:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+	kQ:= FreeKAlgebraNoGeneratorNames( PolyRing, 4, "x" );
+	alpha:= E(4)*One(PolyRing) ;
+	beta:= E(4)*One(PolyRing) ;
+	rels:= [];
+	rels[1]:= kQ.x4*kQ.x1 - alpha*kQ.x1*kQ.x4 ;
+	rels[2]:= kQ.x3*kQ.x2 - beta*kQ.x2*kQ.x3 ;
+#
+	rels[3]:= kQ.x3*kQ.x3 - kQ.x1*kQ.x1 ;
+	rels[4]:= kQ.x4*kQ.x4 - kQ.x2*kQ.x2 ;
+	rels[5]:= kQ.x3*kQ.x1 - kQ.x1*kQ.x3 + kQ.x2*kQ.x2 ;
+	rels[6]:= kQ.x4*kQ.x2 - kQ.x2*kQ.x4 + gamma^2*kQ.x1^2 ;
+	# I:= Ideal( kQ, rels );
+	# gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+	# A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+ParameterizedCassidyVancliff5point2:= function( K )	
+																											
+	local PolyRing, kQ, alpha1, alpha2, beta1, beta2, rels, x1, x2, x3, x4, I, gb, A;
+	PolyRing:= FunctionField( K, ["alpha1", "alpha2", "beta1", "beta2"] );
+	alpha1:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+    alpha2:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+    beta1:= IndeterminatesOfFunctionField( PolyRing )[3] ;
+    beta2:= IndeterminatesOfFunctionField( PolyRing )[4] ;
+	kQ:= FreeKAlgebra( PolyRing, 4, "x" );
+#	p:= E(4);
+	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ];
+	rels[1]:= x3*x1 + x1*x3 - beta2*x2^2 ;
+	rels[2]:= x4*x1 + x1*x4 - alpha2*x3^2 ;
+	rels[3]:= x2*x3 - x3*x2 ;
+	rels[4]:= x4*x4 - x2*x2 ;
+	rels[5]:= x4*x2 + x2*x4 - x3^2 ;
+	rels[6]:= alpha1*x3^2 + beta1*x2^2 - x1^2 ;
+	#	I:= Ideal( kQ, rels );
+	#	gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+	#	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
+
+ParameterizedCassidyVancliff5point3:= function( K )	
+																											
+	local PolyRing, kQ, u13, u14, u24, u34, rels, x1, x2, x3, x4, I, gb, A ;
+	PolyRing:= FunctionField( K, [ "u13", "u14", "u24", "u34" ] ) ;
+	u13:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+    u14:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+    u24:= IndeterminatesOfFunctionField( PolyRing )[3] ;
+    u34:= IndeterminatesOfFunctionField( PolyRing )[4] ;
+	kQ:= FreeKAlgebraNoGeneratorNames( PolyRing, 4, "x" ) ;
+#	p:= E(4);
+	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ];
+	rels[1]:= x1*x3 + u13*x3*x1 ;
+	rels[2]:= x1*x4 + u14*x4*x1 ;
+	rels[3]:= x3*x4 + u34*x4*x3 ;
+	rels[4]:= x4*x4 - x2*x2 ;
+	rels[5]:= x2*x3 + x3*x2 + x4*x4 ;
+	rels[6]:= x2*x4 + u24*x4*x2 + x1*x1 ;
+	#	I:= Ideal( kQ, rels );
+	#	gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+	#	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
