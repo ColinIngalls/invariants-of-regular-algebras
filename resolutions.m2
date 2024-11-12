@@ -44,9 +44,10 @@ dSt0 := lift(d0,S);
 dSt1 := lift(d1,S);
 
 
-phi = map(S,S,dSt0)
-invphimat = transpose inverse ev((coefficients dSt0)_1)
-invphi = map(S,S,transpose (invphimat*(transpose matrix {gens S})))
+phi = map(S,S,dSt0);
+invphimat = transpose inverse ev((coefficients dSt0)_1);
+invphi = map(S,S,transpose (invphimat*(transpose matrix {gens S})));
+
 
 
 dS2 := invphi(dSt2);
@@ -200,3 +201,4 @@ ell = (ncBasis(1,Csh)*random(kk^4))_0
 
 leftEll = directSum(apply(-1..4,i->leftMultiplicationMap(ell,i,i+1)))
 (1..5)/(j->rank (leftEll^j))
+
