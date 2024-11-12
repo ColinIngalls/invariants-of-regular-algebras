@@ -164,6 +164,14 @@ I = ideal(
 C=S/I
 
 
+Iperp = homogDual I
+ring Iperp
+S/Iperp
+
+ncHilbertSeries(S/Iperp,Order => 10)
+
+Iperp 
+
 op = invariantsFromResolution(C)
 
 
