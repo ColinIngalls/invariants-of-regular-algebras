@@ -1060,7 +1060,7 @@ end;
 
 
 
-ParameterizedAlgebraL112autgrp:= function( K )	#p0 and p1 nonzero scalars in K, lambda in K
+ParameterizedAlgebraL112sigma:= function( K )	#p0 and p1 nonzero scalars in K, lambda in K
   local PolyRing, kQ, p0, p1, lambda, alpha, beta, rels, x1, x2, x3, x4, j, I, gb, A ;
   PolyRing:= FunctionField( K, [ "p0", "p1", "lambda", "alpha", "beta" ] ) ;
   p0:= IndeterminatesOfFunctionField( PolyRing )[1] ;
@@ -1225,7 +1225,7 @@ end;
 ###################################################################################################################################
 
 
-ParameterizedAlgebraE3autgrp:= function( K ) 
+ParameterizedAlgebraR3a:= function( K ) 
     local PolyRing, kQ, a, rels, I, gb, A, x1, x2, x3, x4 ;
 	PolyRing:= FunctionField( K, [ "a" ] ) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
