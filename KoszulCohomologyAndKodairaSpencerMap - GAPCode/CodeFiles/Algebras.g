@@ -1107,17 +1107,17 @@ end;
 
 
 
-AlgebraL112sigma:= function( K, p0, p1, lambda, alpha, beta, gamma )	#p0 and p1 nonzero scalars in K, lambda in K and #alpha^2 = beta*gamma 
+AlgebraL112sigma:= function( K, p0, p1, lambda, alpha, beta)	#p0 and p1 nonzero scalars in K, lambda in K and #alpha^2 = beta*gamma 
 	local kQ, rels, x0, x1, x2, x3, x4, I, gb, A ;
 	kQ:= FreeKAlgebra( K, 4, "x" ) ;
 	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
 	rels:= [ ] ;
-	rels[1]:= (alpha)*(x2*x1 - x1*x2) ;
-	rels[2]:= (beta)*(x3*x1) - (1/p0)*alpha*x1*x3 ;
-	rels[3]:= (gamma)*(x4*x1) - p0*alpha*x1*x4 ;
-	rels[4]:= (beta)*(x3*x2) - p1*alpha*x2*x3 ;
-	rels[5]:= (gamma)*(x4*x2) - (1/p1)*alpha*x2*x4 ;
-	rels[6]:= (gamma)*(x4*x3) - p1*(1/p0)*beta*x3*x4 - (alpha)*((p1 - p0)*(x1^2 + lambda*x1*x2 + x2^2) + (1 - p0^2)*x1^2 + (p1^2 - 1)*x2^2) ;
+    rels[1]:= (alpha)*(x2*x1 - x1*x2) ;
+	rels[2]:= (beta)*x3*x1 - (1/p0)*(alpha)*x1*x3 ;
+	rels[3]:= (alpha^2/beta)*x4*x1 - p0*(alpha)*x1*x4 ;
+	rels[4]:= (beta)*x3*x2 - p1*(alpha)*x2*x3 ;
+	rels[5]:= (alpha^2/beta)*x4*x2 - (1/p1)*(alpha)*x2*x4 ;
+	rels[6]:= (alpha^2/beta)*x4*x3 - p1*(1/p0)*(beta)*x3*x4 - (alpha)*(p1 - p0)*((x1^2 + lambda*x1*x2 + x2^2)) - (alpha)*(1 - p0^2)*x1^2 - (alpha)*(p1^2 - 1)*x2^2 ;
 #	I:= Ideal( kQ, rels );
 #	gb:= GroebnerBasis( I, rels );
 	A:= kQ/rels ;
