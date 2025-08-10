@@ -1107,6 +1107,37 @@ end;
 
 
 
+AlgebraL112sigma:= function( K, p0, p1, lambda, alpha, beta, gamma )	#p0 and p1 nonzero scalars in K, lambda in K and #alpha^2 = beta*gamma 
+	local kQ, rels, x0, x1, x2, x3, x4, I, gb, A ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ] ;
+	rels[1]:= (alpha)*(x2*x1 - x1*x2) ;
+	rels[2]:= (beta)*(x3*x1) - (1/p0)*alpha*x1*x3 ;
+	rels[3]:= (gamma)*(x4*x1) - p0*alpha*x1*x4 ;
+	rels[4]:= (beta)*(x3*x2) - p1*alpha*x2*x3 ;
+	rels[5]:= (gamma)*(x4*x2) - (1/p1)*alpha*x2*x4 ;
+	rels[6]:= (gamma)*(x4*x3) - p1*(1/p0)*beta*x3*x4 - (alpha)*((p1 - p0)*(x1^2 + lambda*x1*x2 + x2^2) + (1 - p0^2)*x1^2 + (p1^2 - 1)*x2^2) ;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+#	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+##############################################################################################################################################
 
 
 
@@ -1127,6 +1158,28 @@ AlgebraE3:= function( )
 #	A:= GBQuotient( kQ, rels );
 	return [ A, kQ, rels ];
 	end;
+
+
+
+
+	AlgebraR3a:= function(K, a)         # when a = -5/4, we get #AlgebraE3
+	local kQ, rels, x0, x1, x2, x3, x4, I, gb, A ;
+	kQ:= FreeKAlgebra( Rationals, 4, "y" ) ;
+	x0:= kQ.y1; x1:= kQ.y2; x2:= kQ.y3; x3:= kQ.y4;
+	rels:= [ ] ;
+	rels[1]:= Commutator( x0, x1 ) + 4*a*x0^2 ;
+	rels[2]:= Commutator( x1, x2 ) + 4*(a+1)*x1^2 - 8*(a+1)*(a+2)*x0*x1 - 4*(a+2)*x0*x2 ;
+	rels[3]:= Commutator( x0, x2 ) + 4*a*x0*x1 + 8*a^2*x0^2 - 8*a*x0^2 ; 
+	rels[4]:= Commutator( x1, x3 ) + 4*(a+1)*x1*x2 + 8*a*(a+1)*x1^2 - (64/3)* a*(a+1)*(a+2)*x0*x1 - 16*(a+1)*(a+2)*x0*x2 - 4*(a+3)*x0*x3 ;
+	rels[5]:= Commutator( x0, x3 ) + 4*a*x0*x2 - 8*(a-a^2)*x0*x1 - (64/6)* (-a^3 + 3*a^2 - 2*a)*x0^2 ;
+	rels[6]:= Commutator( x2, x3 ) + 4*(a+2)*x2^2 - 8*(a+2)*(a+3)*x1*x2 + (64/6)* (a+2)*(a+3)*(a+4)*x0*x2 - 4*(a+3)*x1*x3 + 8*(a+3)*(a+4)*x0*x3 ;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels );
+	A:= kQ/rels ;
+#	A:= GBQuotient( kQ, rels );
+	return [ A, kQ, rels ];
+	end;
+
 
 
 
