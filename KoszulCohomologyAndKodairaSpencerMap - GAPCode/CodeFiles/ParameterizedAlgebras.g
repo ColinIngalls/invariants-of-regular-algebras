@@ -1267,14 +1267,19 @@ ParameterizedPolynomialTwist:= function( K )
 	a43:= IndeterminatesOfFunctionField( PolyRing )[15] ;
 	a44:= IndeterminatesOfFunctionField( PolyRing )[16] ;
     kQ:= FreeKAlgebra( PolyRing, 4, "x" ) ;
-    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4 ;
-    rels:= [ ] ;
-	rels[1]:= a11*x1*x2 + a12*x2*x2 + a13*x3*x2 + a14*x4*x2 - (a21*x1*x1 + a22*x2*x1 + a23*x3*x1 + a24*x4*x1);
-	rels[2]:= a11*x1*x3 + a12*x2*x3 + a13*x3*x3 + a14*x4*x3 - (a31*x1*x1 + a32*x2*x1 + a33*x3*x1 + a34*x4*x1);
-	rels[3]:= a11*x1*x4 + a12*x2*x4 + a13*x3*x4 + a14*x4*x4 - (a41*x1*x1 + a42*x2*x1 + a43*x3*x1 + a44*x4*x1);
-	rels[4]:= a21*x1*x3 + a22*x2*x3 + a23*x3*x3 + a24*x4*x3 - (a31*x1*x2 + a32*x2*x2 + a33*x3*x2 + a34*x4*x2);
-	rels[5]:= a21*x1*x4 + a22*x2*x4 + a23*x3*x4 + a24*x4*x4 - (a41*x1*x2 + a42*x2*x2 + a43*x3*x2 + a44*x4*x2);
-	rels[6]:= a31*x1*x4 + a32*x2*x4 + a33*x3*x4 + a34*x4*x4 - (a41*x1*x3 + a42*x2*x3 + a43*x3*x3 + a44*x4*x3);
+	rels:= [ ] ;
+	rels[1] := a11*kQ.x1*kQ.x2 + a12*kQ.x2*kQ.x2 + a13*kQ.x3*kQ.x2 + a14*kQ.x4*kQ.x2 
+	       - (a21*kQ.x1*kQ.x1 + a22*kQ.x2*kQ.x1 + a23*kQ.x3*kQ.x1 + a24*kQ.x4*kQ.x1);
+    rels[2] := a11*kQ.x1*kQ.x3 + a12*kQ.x2*kQ.x3 + a13*kQ.x3*kQ.x3 + a14*kQ.x4*kQ.x3 
+           - (a31*kQ.x1*kQ.x1 + a32*kQ.x2*kQ.x1 + a33*kQ.x3*kQ.x1 + a34*kQ.x4*kQ.x1);
+    rels[3] := a11*kQ.x1*kQ.x4 + a12*kQ.x2*kQ.x4 + a13*kQ.x3*kQ.x4 + a14*kQ.x4*kQ.x4 
+           - (a41*kQ.x1*kQ.x1 + a42*kQ.x2*kQ.x1 + a43*kQ.x3*kQ.x1 + a44*kQ.x4*kQ.x1);
+    rels[4] := a21*kQ.x1*kQ.x3 + a22*kQ.x2*kQ.x3 + a23*kQ.x3*kQ.x3 + a24*kQ.x4*kQ.x3 
+           - (a31*kQ.x1*kQ.x2 + a32*kQ.x2*kQ.x2 + a33*kQ.x3*kQ.x2 + a34*kQ.x4*kQ.x2);
+    rels[5] := a21*kQ.x1*kQ.x4 + a22*kQ.x2*kQ.x4 + a23*kQ.x3*kQ.x4 + a24*kQ.x4*kQ.x4 
+           - (a41*kQ.x1*kQ.x2 + a42*kQ.x2*kQ.x2 + a43*kQ.x3*kQ.x2 + a44*kQ.x4*kQ.x2);
+    rels[6] := a31*kQ.x1*kQ.x4 + a32*kQ.x2*kQ.x4 + a33*kQ.x3*kQ.x4 + a34*kQ.x4*kQ.x4 
+           - (a41*kQ.x1*kQ.x3 + a42*kQ.x2*kQ.x3 + a43*kQ.x3*kQ.x3 + a44*kQ.x4*kQ.x3);
 #    I:= Ideal( kQ, rels ) ;
 #	 gb:= GroebnerBasis( I, rels) ;
 #   A:= kQ/rels ;
@@ -1284,6 +1289,29 @@ end;
 
 
 
+###############################################################################################################################
+
+
+ParameterizedPolynomialTwist2:= function( K ) 
+    local PolyRing, kQ, a11, a12, rels, I, gb, A, x1, x2, x3, x4 ;
+	PolyRing:= FunctionField( K, [ "a11", "a12" ] ) ;
+    a11:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+	a12:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+    kQ:= FreeKAlgebraNoGeneratorNames( PolyRing, 4, "x" ) ;
+	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels:= [ ] ;
+	rels[1] := a11*x1*x2 + a12*x2*x2 + 5/11*x3*x2 + 7/10*x4*x2 - (11*x1*x1 + 18*x2*x1 + 53*x3*x1 + 89/11*x4*x1);
+    rels[2] := a11*x1*x3 + a12*x2*x3 + 5/11*x3*x3 + 7/19*x4*x3 - (6*x1*x1 + 23*x2*x1 + 7*x3*x1 + 101*x4*x1);
+    rels[3] := a11*x1*x4 + a12*x2*x4 + 5/11*x3*x4 + 7/19*x4*x4 - (63*x1*x1 + 129*x2*x1 + 159*x3*x1 + 83*x4*x1);
+    rels[4] := 11*x1*x3 + 18*x2*x3 + 53*x3*x3 + 89/10*x4*x3 - (6*x1*x2 + 23*x2*x2 + 7*x3*x2 + 101*x4*x2);
+    rels[5] := 11*x1*x4 + 18*x2*x4 + 53*x3*x4 + 89/10*x4*x4 - (63*x1*x2 + 129*x2*x2 + 159*x3*x2 + 83*x4*x2);
+    rels[6] := 6*x1*x4 + 23*x2*x4 + 7*x3*x4 + 101*x4*x4 - (63*x1*x3 + 129*x2*x3 + 159*x3*x3 + 83*x4*x3);
+#    I:= Ideal( kQ, rels ) ;
+#	 gb:= GroebnerBasis( I, rels) ;
+# A:= kQ/rels ;
+#    A:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
 
 
 
