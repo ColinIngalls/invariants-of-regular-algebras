@@ -1131,12 +1131,6 @@ end;
 
 
 
-
-
-
-
-
-
 ##############################################################################################################################################
 
 
@@ -1193,17 +1187,46 @@ AlgebraE3:= function( )
 #Polynomial Twist by Colin Ingalls
 
 AlgebraPolynomialTwist:= function( K, a11, a12, a13, a14, a21, a22, a23, a24, a31, a32, a33, a34, a41, a42, a43, a44 )	
-	local kQ, rels, x0, x1, x2, x3, x4, I, gb, A ;
-	kQ:= FreeKAlgebra( K, 4, "x" ) ;
-	x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	local kQ, rels, x1, x2, x3, x4, I, gb, A ;
+	kQ:= FreeKAlgebraNoGeneratorNames( K, 4, "x" ) ;
 	rels:= [ ] ;
-	rels[1]:= a11*x1*x2 + a12*x2*x2 + a13*x3*x2 + a14*x4*x2 - (a21*x1*x1 + a22*x2*x1 + a23*x3*x1 + a24*x4*x1);
-	rels[2]:= a11*x1*x3 + a12*x2*x3 + a13*x3*x3 + a14*x4*x3 - (a31*x1*x1 + a32*x2*x1 + a33*x3*x1 + a34*x4*x1) ;
-	rels[3]:= a11*x1*x4 + a12*x2*x4 + a13*x3*x4 + a14*x4*x4 - (a41*x1*x1 + a42*x2*x1 + a43*x3*x1 + a44*x4*x1) ;
-	rels[4]:= a21*x1*x3 + a22*x2*x3 + a23*x3*x3 + a24*x4*x3 - (a31*x1*x2 + a32*x2*x2 + a33*x3*x2 + a34*x4*x2) ;
-	rels[5]:= a21*x1*x4 + a22*x2*x4 + a23*x3*x4 + a24*x4*x4 - (a41*x1*x2 + a42*x2*x2 + a43*x3*x2 + a44*x4*x2) ;
-	rels[6]:= a31*x1*x4 + a32*x2*x4 + a33*x3*x4 + a34*x4*x4 - (a41*x1*x3 + a42*x2*x3 + a43*x3*x3 + a44*x4*x3) ;
-#	I:= Ideal( kQ, rels );
+	rels[1] := a11*kQ.x1*kQ.x2 + a12*kQ.x2*kQ.x2 + a13*kQ.x3*kQ.x2 + a14*kQ.x4*kQ.x2 
+	       - (a21*kQ.x1*kQ.x1 + a22*kQ.x2*kQ.x1 + a23*kQ.x3*kQ.x1 + a24*kQ.x4*kQ.x1);
+    rels[2] := a11*kQ.x1*kQ.x3 + a12*kQ.x2*kQ.x3 + a13*kQ.x3*kQ.x3 + a14*kQ.x4*kQ.x3 
+           - (a31*kQ.x1*kQ.x1 + a32*kQ.x2*kQ.x1 + a33*kQ.x3*kQ.x1 + a34*kQ.x4*kQ.x1);
+    rels[3] := a11*kQ.x1*kQ.x4 + a12*kQ.x2*kQ.x4 + a13*kQ.x3*kQ.x4 + a14*kQ.x4*kQ.x4 
+           - (a41*kQ.x1*kQ.x1 + a42*kQ.x2*kQ.x1 + a43*kQ.x3*kQ.x1 + a44*kQ.x4*kQ.x1);
+    rels[4] := a21*kQ.x1*kQ.x3 + a22*kQ.x2*kQ.x3 + a23*kQ.x3*kQ.x3 + a24*kQ.x4*kQ.x3 
+           - (a31*kQ.x1*kQ.x2 + a32*kQ.x2*kQ.x2 + a33*kQ.x3*kQ.x2 + a34*kQ.x4*kQ.x2);
+    rels[5] := a21*kQ.x1*kQ.x4 + a22*kQ.x2*kQ.x4 + a23*kQ.x3*kQ.x4 + a24*kQ.x4*kQ.x4 
+           - (a41*kQ.x1*kQ.x2 + a42*kQ.x2*kQ.x2 + a43*kQ.x3*kQ.x2 + a44*kQ.x4*kQ.x2);
+    rels[6] := a31*kQ.x1*kQ.x4 + a32*kQ.x2*kQ.x4 + a33*kQ.x3*kQ.x4 + a34*kQ.x4*kQ.x4 
+           - (a41*kQ.x1*kQ.x3 + a42*kQ.x2*kQ.x3 + a43*kQ.x3*kQ.x3 + a44*kQ.x4*kQ.x3);
+	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels );
+#	A:= kQ/rels ;
+#	A:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+AlgebraPolynomialTwist2:= function( K )	
+	local kQ, rels, x1, x2, x3, x4, I, gb, A ;
+	kQ:= FreeKAlgebra( K, 4, "x" ) ;
+	rels:= [ ] ;
+	rels[1] := 7*kQ.x1*kQ.x2 + 8/11*kQ.x2*kQ.x2 + 9/123*kQ.x3*kQ.x2 + 76/17*kQ.x4*kQ.x2 
+	       - (7/83*kQ.x1*kQ.x1 + 5*kQ.x2*kQ.x1 + 9*kQ.x3*kQ.x1 + 11*kQ.x4*kQ.x1);
+    rels[2] := 7*kQ.x1*kQ.x3 + 8/11*kQ.x2*kQ.x3 + 9/123*kQ.x3*kQ.x3 + 76/17*kQ.x4*kQ.x3 
+           - (5/12*kQ.x1*kQ.x1 + 8/11*kQ.x2*kQ.x1 + 9/153*kQ.x3*kQ.x1 + 7/11*kQ.x4*kQ.x1);
+    rels[3] := 7*kQ.x1*kQ.x4 + 8/11*kQ.x2*kQ.x4 + 9/123*kQ.x3*kQ.x4 + 76/17*kQ.x4*kQ.x4 
+           - (6*kQ.x1*kQ.x1 + 19*kQ.x2*kQ.x1 + 71*kQ.x3*kQ.x1 + 101*kQ.x4*kQ.x1);
+    rels[4] := 7/83*kQ.x1*kQ.x3 + 5*kQ.x2*kQ.x3 + 9*kQ.x3*kQ.x3 + 11*kQ.x4*kQ.x3 
+           - (5/12*kQ.x1*kQ.x2 + 8/11*kQ.x2*kQ.x2 + 9/153*kQ.x3*kQ.x2 + 7/11*kQ.x4*kQ.x2);
+    rels[5] := 7/83*kQ.x1*kQ.x4 + 5*kQ.x2*kQ.x4 + 9*kQ.x3*kQ.x4 + 11*kQ.x4*kQ.x4 
+           - (6*kQ.x1*kQ.x2 + 19*kQ.x2*kQ.x2 + 71*kQ.x3*kQ.x2 + 101*kQ.x4*kQ.x2);
+    rels[6] := 5/12*kQ.x1*kQ.x4 + 8/11*kQ.x2*kQ.x4 + 9/153*kQ.x3*kQ.x4 + 7/11*kQ.x4*kQ.x4 
+           - (6*kQ.x1*kQ.x3 + 19*kQ.x2*kQ.x3 + 71*kQ.x3*kQ.x3 + 101*kQ.x4*kQ.x3);
+	I:= Ideal( kQ, rels );
 #	gb:= GroebnerBasis( I, rels );
 #	A:= kQ/rels ;
 #	A:= GBQuotient( kQ, rels );
