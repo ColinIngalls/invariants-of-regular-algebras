@@ -1007,7 +1007,28 @@ PymAlgebra:= function(K, c1, c2, c3, d1, d2, d3)
 	return [ A, kQ, rels ];
 end;
 
-# Algebra with parameters q, b, c0, c1, c2
+
+
+# Pym's Algebra S(2,3) with automorphism sigma
+PymAlgebrasigma:= function(K, c1, c2, c3, d1, d2, d3, alpha, beta1, beta2, beta3) 
+# ci's and di's in complex field
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+    rels:= [ ];
+    rels[1] := alpha*(x4*x1 - x1*x4) + beta1*x1^2 + beta2*x2*x1 + beta3*x3*x1 - alpha*x1^2 - alpha*x1*((-c3 - 2)*x2 + c1*x3) - d1*alpha*x2*x3;
+    rels[2] := alpha*(x4*x2 - x2*x4) + beta1*x1*x2 + beta2*x2^2 + beta3*x3*x2 - alpha*x2^2 - alpha*x2*((-c1 - 2)*x3 + c2*x1) - d2*alpha*x3*x1;
+    rels[3] := alpha*(x4*x3 - x3*x4) + beta1*x1*x3 + beta2*x2*x3 + beta3*x3^2 - alpha*x3^2 - alpha*x3*((-c2 - 2)*x1 + c3*x2) - d3*alpha*x1*x2;
+    rels[4]:= x2*x3 - x3*x2;
+    rels[5]:= x3*x1 - x1*x3;
+    rels[6]:= x1*x2 - x2*x1;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+# Algebra with parameters q, b, c0, c1, c2.       # Central Extensions twist by Colin Ingalls and Brent Pym 
 NoNameAlgebra:= function(K, q, b, c0, c1, c2) # all parameters in rational field
     local kQ, rels, I, gb, A, x0, x1, x2, x3;
     kQ:= FreeKAlgebra(K, 4, "x");
@@ -1232,3 +1253,750 @@ AlgebraPolynomialTwist2:= function( K )
 #	A:= GBQuotient( kQ, rels );
 	return [ 0, kQ, rels ];
 end;
+
+
+#####################################################################################################################################
+
+# Algebra (7.1) with parameters c, d, U, V, S, T
+Algebra7point1:= function(K, c, d, U, V, S, T) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+    rels := [ ];
+    rels[1] := x3*x4*V^2 + x4*x3*U^2;
+    rels[2] := c*d*x1*x4*U + x4*x1*V;
+    rels[3] := c*d*x2*x4*U - x4*x2*V;
+    rels[4] := x1^2*S + x2^2*T;
+    rels[5] := x1*x3*V + d*x3*x1*U;
+    rels[6] := x2*x3*V + d*x3*x2*U;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+# Algebra (7.2) with parameters c, d, U, V, S, T
+Algebra7point2:= function(K, c, d, U, V, S, T) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+    rels := [ ];
+    rels[1] := x3*x4*V^2 + x4*x3*U^2;
+    rels[2] := c*d*x1*x4*U + x4*x1*V;
+    rels[3] := c*d*x2*x4*U + x4*x2*V;
+    rels[4] := x1^2*S + x2^2*T;
+    rels[5] := x1*x3*V + d*x3*x1*U;
+    rels[6] := x2*x3*V - d*x3*x2*U;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+# Algebra (7.3) with parameters p, d, a1, a4, a7
+Algebra7point3:= function(d, a1, a4, a7) 
+    local kQ, p, rels, Aa, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(GaussianRationals, 4, "x");
+	p:= E(4);
+    rels := [ ];
+    rels[1] := d*kQ.x1*kQ.x4 + kQ.x4*kQ.x1;
+    rels[2] := d*kQ.x2*kQ.x4 + kQ.x4*kQ.x2;
+    rels[3] := a1*kQ.x1*kQ.x1 + a4*d^2*kQ.x2*kQ.x2;
+    rels[4] := d*kQ.x3*kQ.x4 + kQ.x4*kQ.x3;
+    rels[5] := a4*kQ.x1*kQ.x2 - a4*kQ.x2*kQ.x1 - a7*kQ.x3*kQ.x3;
+    rels[6] := p*kQ.x2*kQ.x3 - kQ.x3*kQ.x2;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    Aa:= GBQuotient( kQ, rels ) ;
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+# Algebra (7.4) with parameters p, d, a1, a4, a7
+Algebra7point4:= function(d, a1, a4, a7) 
+local kQ, p, rels, Aa, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(GaussianRationals, 4, "x");
+	p:= E(4);
+    rels := [ ];
+    rels[1] := d*kQ.x1*kQ.x4 + kQ.x4*kQ.x1;
+    rels[2] := d*kQ.x2*kQ.x4 + kQ.x4*kQ.x2;
+    rels[3] := a1*kQ.x1*kQ.x1 + a4*d^2*kQ.x2*kQ.x2;
+    rels[4] := d*kQ.x3*kQ.x4 - kQ.x4*kQ.x3;
+    rels[5] := a4*kQ.x1*kQ.x2 - a4*kQ.x2*kQ.x1 - a7*kQ.x3*kQ.x3;
+    rels[6] := p*kQ.x2*kQ.x3 + kQ.x3*kQ.x2;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    Aa:= GBQuotient( kQ, rels ) ;
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+# Algebra (7.5) with parameters p, d, a1, a4, a7
+Algebra7point5:= function(d, a1, a4, a7) 
+local kQ, p, rels, Aa, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(GaussianRationals, 4, "x");
+	p:= E(4);
+    rels := [ ];
+    rels[1] := d*kQ.x1*kQ.x4 + kQ.x4*kQ.x1;
+    rels[2] := d*kQ.x2*kQ.x4 - kQ.x4*kQ.x2;
+    rels[3] := a1*kQ.x1*kQ.x1 + a4*d^2*kQ.x2*kQ.x2;
+    rels[4] := d*kQ.x3*kQ.x4 - p*kQ.x4*kQ.x3;
+    rels[5] := a4*kQ.x1*kQ.x2 + a4*kQ.x2*kQ.x1 - a7*kQ.x3*kQ.x3;
+    rels[6] := kQ.x2*kQ.x3 + kQ.x3*kQ.x2;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    Aa:= GBQuotient( kQ, rels ) ;
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+# Algebra (7.6) with parameters p, d, a1, a4, a7
+Algebra7point6:= function(d, a1, a4, a7) 
+local kQ, p, rels, Aa, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(GaussianRationals, 4, "x");
+	p:= E(4);
+    rels := [ ];
+    rels[1] := d*kQ.x1*kQ.x4 + kQ.x4*kQ.x1;
+    rels[2] := d*kQ.x2*kQ.x4 - kQ.x4*kQ.x2;
+    rels[3] := a1*kQ.x1*kQ.x1 + a4*d^2*kQ.x2*kQ.x2;
+    rels[4] := d*kQ.x3*kQ.x4 + p*kQ.x4*kQ.x3;
+    rels[5] := a4*kQ.x1*kQ.x2 + a4*kQ.x2*kQ.x1 - a7*kQ.x3*kQ.x3;
+    rels[6] := kQ.x2*kQ.x3 - kQ.x3*kQ.x2;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    Aa:= GBQuotient( kQ, rels ) ;
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+# Algebra (7.7) with parameters a, b, c, d
+Algebra7point7:= function(K, a, b, c, d) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+    rels := [ ];
+    rels[1] := x4*x3 - x3*x4 - a*x1*x2;
+    rels[2] := x4*x2 - b*x3^2 + x2*x4;
+    rels[3] := x4*x1 - c*x3^2 + x1*x4;
+    rels[4] := x3*x2 - x2*x3 + b*d*c^(-1)*x2*x4 - b^2*d*c^(-2)*x1*x4;
+    rels[5] := x3*x1 - x1*x3 + b*d*c^(-1)*x1*x4 - d*x2*x4;
+    rels[6] := x2*x1 + x1*x2;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+#########################################################################################################################################################
+
+# Lie Algebra 1 
+LieAlgebra1:= function(K) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+    rels := [ ];
+    rels[1] := x2*x3 - x3*x2 - x1*x4;
+    rels[2] := x1*x2 - x2*x1;
+    rels[3] := x1*x3 - x3*x1;
+    rels[4] := x1*x4 - x4*x1;
+    rels[5] := x2*x4 - x4*x2;
+    rels[6] := x3*x4 - x4*x3;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+# Lie Algebra 2
+LieAlgebra2:= function(K) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+    rels := [ ];
+    rels[1] := x1*x2 - x2*x1 - x1*x4;
+    rels[2] := x1*x3 - x3*x1;
+    rels[3] := x2*x3 - x3*x2;
+    rels[4] := x1*x4 - x4*x1;
+    rels[5] := x2*x4 - x4*x2;
+    rels[6] := x3*x4 - x4*x3;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+# Lie Algebra 3
+LieAlgebra3:= function(K, alpha ) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x1*x2 - x2*x1;
+    rels[2] := x1*x3 - x3*x1 - x1*x4;
+    rels[3] := x2*x3 - x3*x2 - alpha*x2*x4;
+    rels[4] := x1*x4 - x4*x1;
+    rels[5] := x2*x4 - x4*x2;
+    rels[6] := x3*x4 - x4*x3;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+# Lie Algebra 4
+LieAlgebra4:= function(K, beta ) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x1*x2 - x2*x1;
+    rels[2] := x1*x3 - x3*x1 - x1*x4 - beta*x2*x4;
+    rels[3] := x2*x3 - x3*x2 - x2*x4;
+    rels[4] := x1*x4 - x4*x1;
+    rels[5] := x2*x4 - x4*x2;
+    rels[6] := x3*x4 - x4*x3;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+# Lie Algebra sl2
+LieAlgebrasl2:= function( K ) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebra(K, 4, "x");
+	rels := [ ];
+    rels[1] := kQ.x1*kQ.x3 - kQ.x3*kQ.x1 - 2*kQ.x1*kQ.x4;
+    rels[2] := kQ.x2*kQ.x3 - kQ.x3*kQ.x2 + 2*kQ.x2*kQ.x4;
+    rels[3] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 - kQ.x3*kQ.x4;
+    rels[4] := kQ.x1*kQ.x4 - kQ.x4*kQ.x1;
+    rels[5] := kQ.x2*kQ.x4 - kQ.x4*kQ.x2;
+    rels[6] := kQ.x3*kQ.x4 - kQ.x4*kQ.x3;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    #A:= kQ/rels ;
+	return [ 0, kQ, rels ];
+end;
+
+
+############################################################################################################################################################
+
+# Extensions of Truncated four generator Polynomial Rings
+
+#F(0,-1,-1,2)(0,0,0,0)
+AlgebraF1:= function(K, q14, q13, q23, q24, t) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x1 - (q14^2/q13)*x1*x2;
+    rels[2] := x3*x1 - q13*x1*x3;
+    rels[3] := x4*x1 - q14*x1*x4;
+    rels[4] := x3*x2 - q23*x2*x3 - t*x4*x4;
+    rels[5] := x4*x2 - q24*x2*x4;
+    rels[6] := x4*x3 - (1/q24)*x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+#F(-1,-1,1,1)(0,0,0,0)
+AlgebraF2:= function(K, q12, t, q13, q14, q23) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x1 - q12*x1*x2 - t*x3*x4;
+    rels[2] := x3*x1 - q13*x1*x3;
+    rels[3] := x4*x1 - q14*x1*x4;
+    rels[4] := x3*x2 - q23*x2*x3;
+    rels[5] := x4*x2 - (1/(q13*q23*q14))*x2*x4;
+    rels[6] := x4*x3 - (1/(q13*q23))*x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+#F(0,-1,-1,2)(0,0,0,0)(2,-1,-1,0)
+AlgebraF3:= function(K, q13, q23, t, s, q34) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x1 - (1/q13)*x1*x2;
+    rels[2] := x3*x1 - q13*x1*x3;
+    rels[3] := x4*x1 - x1*x4;
+    rels[4] := x3*x2 - q23*x2*x3 - t*x4*x4 - s*x1*x1;
+    rels[5] := x4*x2 - (1/q34)*x2*x4;
+    rels[6] := x4*x3 - q34*x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+#F(0,-1,-1,2)(-1,0,-1,2)(0,0,0,0)
+AlgebraF4:= function(K, q12, q14, t, s) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x1 - q12*x1*x2;
+    rels[2] := x3*x1 - (q14^2/q12)*x1*x3 - t*x4*x4;
+    rels[3] := x4*x1 - q14*x1*x4;
+    rels[4] := x3*x2 - (q14^2*q12)*x2*x3 - s*x4*x4;
+    rels[5] := x4*x2 - q14*x2*x4;
+    rels[6] := x4*x3 - (1/q14)*x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+#F(0,-1,-1,2)(0,0,0,0)(-1,-1,2,0)
+AlgebraF5:= function(K, q12, t, q24, s) 
+    local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebra(K, 4, "x");
+	rels := [ ];
+    rels[1] := kQ.x2*kQ.x1 - q12*kQ.x1*kQ.x2 - t*kQ.x3*kQ.x3;
+    rels[2] := kQ.x3*kQ.x1 - (1/(q24^6*q12))*kQ.x1*kQ.x3;
+    rels[3] := kQ.x4*kQ.x1 - (1/q24^3)*kQ.x1*kQ.x4;
+    rels[4] := kQ.x3*kQ.x2 - (q24^6*q12)*kQ.x2*kQ.x3 - s*kQ.x4*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - q24*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - (1/q24)*kQ.x3*kQ.x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+#   A:= kQ/rels ;
+	return [ 0, kQ, rels ];
+end;
+
+############################################################################################################################################################################################
+
+#Ore extensions of three dimensional algebras
+
+
+AlgebraTypeA1OreExt:= function( a, b, c, d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 3);
+	p:= E(3);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := c*kQ.x1*kQ.x1 + a*kQ.x2*kQ.x3 + b*kQ.x3*kQ.x2;
+    rels[2] := c*kQ.x2*kQ.x2 + a*kQ.x3*kQ.x1 + b*kQ.x1*kQ.x3;
+    rels[3] := c*kQ.x3*kQ.x3 + a*kQ.x1*kQ.x2 + b*kQ.x2*kQ.x1;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*p*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - d*p^2*kQ.x3*kQ.x4;
+#    Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeA2OreExt:= function( a, b, c, d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 3);
+	p:= E(3);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := c*kQ.x1*kQ.x1 + a*kQ.x2*kQ.x3 + b*kQ.x3*kQ.x2;
+    rels[2] := c*kQ.x2*kQ.x2 + a*kQ.x3*kQ.x1 + b*kQ.x1*kQ.x3;
+    rels[3] := c*kQ.x3*kQ.x3 + a*kQ.x1*kQ.x2 + b*kQ.x2*kQ.x1;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x2*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*p*kQ.x3*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - d*p^2*kQ.x1*kQ.x4;
+#    Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeA3OreExt:= function( a, b, c, d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 3);
+	p:= E(3);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+	rels[1] := c*kQ.x1*kQ.x1 + a*kQ.x2*kQ.x3 + b*kQ.x3*kQ.x2;
+    rels[2] := c*kQ.x2*kQ.x2 + a*kQ.x3*kQ.x1 + b*kQ.x1*kQ.x3;
+    rels[3] := c*kQ.x3*kQ.x3 + a*kQ.x1*kQ.x2 + b*kQ.x2*kQ.x1;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x3*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*p*kQ.x1*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - d*p^2*kQ.x2*kQ.x4;
+#    Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeB1OreExt:= function( a, d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 2);
+	p:= E(2);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+	rels[1] := kQ.x1*kQ.x2 + kQ.x2*kQ.x1 + kQ.x2*kQ.x2 - kQ.x3*kQ.x3;
+    rels[2] := kQ.x1*kQ.x1 + kQ.x2*kQ.x1 + kQ.x1*kQ.x2 - a*kQ.x3*kQ.x3;
+    rels[3] := kQ.x3*kQ.x1 - kQ.x1*kQ.x3 + a*kQ.x3*kQ.x2 - a*kQ.x2*kQ.x3;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - p*d*kQ.x3*kQ.x4;
+    Aa:= GBQuotient( kQ, rels );
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+AlgebraTypeE1OreExt:= function( d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 9);
+	p:= E(9);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+	rels[1] := kQ.x3*kQ.x1 + p^8*kQ.x1*kQ.x3 + p^4*kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 + p^5*kQ.x2*kQ.x1 + p^7*kQ.x3*kQ.x3;
+    rels[3] := p*kQ.x1*kQ.x1 + kQ.x2*kQ.x3 + p^2*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - d*kQ.x3*kQ.x4;
+#    Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+
+AlgebraTypeE2OreExt:= function( d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 9);
+	p:= E(9);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+	rels[1] := kQ.x3*kQ.x1 + p^8*kQ.x1*kQ.x3 + p^4*kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 + p^5*kQ.x2*kQ.x1 + p^7*kQ.x3*kQ.x3;
+    rels[3] := p*kQ.x1*kQ.x1 + kQ.x2*kQ.x3 + p^2*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*p^3*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - d*p^6*kQ.x3*kQ.x4;
+#    Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeHIOreExt:= function( d )     
+	local Qadj, kQ, p, q, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 4);
+	p:= E(4);
+	q:= E(4);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
+    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 + d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - q*d*kQ.x3*kQ.x4;
+    Aa:= GBQuotient( kQ, rels );
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+AlgebraTypeHIIOreExt:= function( d )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 4);
+	p:= E(4);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
+    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 + d*kQ.x3*kQ.x4;
+    Aa:= GBQuotient( kQ, rels );
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+
+AlgebraTypeS1dashOreExt:= function(K, a, b, c, d, alpha)     
+	local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x3 + a*alpha^(-1)*x3*x2;
+    rels[2] := alpha*x3*x1 + a*x1*x3;
+    rels[3] := x3*x3 + x1*x2 + a*x2*x1;
+    rels[4] := x4*x1 - b^2*d*x1*x4;
+    rels[5] := x4*x2 - c^2*d*x2*x4;
+    rels[6] := x4*x3 - b*c*d*x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+AlgebraTypeS2OreExt:= function( a, d, alpha )     
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 2);
+	p:= E(2);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x3*kQ.x1 + alpha^(-1)*kQ.x1*kQ.x3;
+    rels[2] := kQ.x3*kQ.x2 - alpha^(-1)*kQ.x2*kQ.x3;
+    rels[3] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - a*d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - p*a*d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - d*kQ.x3*kQ.x4;
+    Aa:= GBQuotient( kQ, rels );
+	return [ Aa, kQ, rels ];
+end;
+
+######################################################################################################################################################################################
+
+
+#Central extensions of three dimensional algebras
+
+AlgebraTypeACentExt:= function(K, a, b, c, alpha1, alpha2, alpha3)     
+	local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebra(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := c*x1^2 + a*x2*x3 + b*x3*x2 + alpha1*x4^2;
+    rels[2] := c*x2^2 + a*x3*x1 + b*x1*x3 + alpha2*x4^2;
+    rels[3] := c*x3^2 + a*x1*x2 + b*x2*x1 + alpha3*x4^2;
+    rels[4] := x4*x1 - x1*x4;
+    rels[5] := x4*x2 - x2*x4;
+    rels[6] := x4*x3 - x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+#    A:= kQ/rels ;
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeBCentExt:= function(K, a, l11, l12, l22)     
+	local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebra(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x1*x2 + x2*x1 + x2^2 - x3^2 + (l11*x1 + l12*x2)*x4;
+    rels[2] := x1^2 + x2*x1 + x1*x2 - a*x3^2 + (l12*x1 + l22*x2)*x4;
+    rels[3] := x3*x1 - x1*x3 + a*x3*x2 - a*x2*x3;
+    rels[4] := x4*x1 - x1*x4;
+    rels[5] := x4*x2 - x2*x4;
+    rels[6] := x4*x3 - x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+#    A:= kQ/rels ;
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeECentExt:= function(  )     # where p = zeta9 i.e. primitive 9th root of unity
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 9);
+	p:= E(9);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x3*kQ.x1 + p^8*kQ.x1*kQ.x3 + p^4*kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 + p^5*kQ.x2*kQ.x1 + p^7*kQ.x3*kQ.x3;
+    rels[3] := p*kQ.x1*kQ.x1 + kQ.x2*kQ.x3 + p^2*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - kQ.x3*kQ.x4;
+#	Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+
+AlgebraTypeHICentExt:= function(  )     # where p = zeta4 i.e. primitive 4th root of unity
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 4);
+	p:= E(4);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2 + kQ.x1*kQ.x4;
+    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
+    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - kQ.x3*kQ.x4;
+#	Aa:= GBQuotient( kQ, rels );
+	return [ 0, kQ, rels ];
+end;
+
+
+
+AlgebraTypeHIICentExt:= function( d )     # where p = zeta4 i.e. primitive 4th root of unity
+	local Qadj, kQ, p, q, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 4);
+	p:= E(4);
+	q:= E(4); 
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
+    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 + d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 - q*d*kQ.x3*kQ.x4;
+	Aa:= GBQuotient( kQ, rels );
+	return [ Aa, kQ, rels ];
+end;
+
+
+AlgebraTypeHIIICentExt:= function( d )     # where p = zeta4 i.e. primitive 4th root of unity
+	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
+	Qadj:= CF(Rationals, 4);
+	p:= E(4);
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
+	rels := [ ];
+    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
+    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
+    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
+    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
+    rels[5] := kQ.x4*kQ.x2 - d*kQ.x2*kQ.x4;
+    rels[6] := kQ.x4*kQ.x3 + d*kQ.x3*kQ.x4;
+	Aa:= GBQuotient( kQ, rels );
+	return [ Aa, kQ, rels ];
+end;
+
+
+
+
+AlgebraTypeS1CentExt:= function(K, a, alpha, beta)     
+	local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x3 + a*beta*x3*x2;
+    rels[2] := alpha*x3*x1 + a*x1*x3;
+    rels[3] := x1*x2 + a*x2*x1;
+    rels[4] := x4*x1 - x1*x4;
+    rels[5] := x4*x2 - x2*x4;
+    rels[6] := x4*x3 - x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+AlgebraTypeS1dashCentExt:= function(K, a, alpha)     
+	local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x2*x3 + a*alpha^(-1)*x3*x2;
+    rels[2] := alpha*x3*x1 + a*x1*x3;
+    rels[3] := x3^2 + x1*x2 + a*x2*x1;
+    rels[4] := x4*x1 - x1*x4;
+    rels[5] := x4*x2 - x2*x4;
+    rels[6] := x4*x3 - x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+AlgebraTypeS2CentExt:= function(K, alpha)     
+	local kQ, rels, I, gb, A, x1, x2, x3, x4;
+    kQ:= FreeKAlgebraNoGeneratorNames(K, 4, "x");
+    x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
+	rels := [ ];
+    rels[1] := x3*x1 + alpha^(-1)*x1*x3;
+    rels[2] := x3*x2 - alpha^(-1)*x2*x3;
+    rels[3] := x1^2 - x2^2;
+    rels[4] := x4*x1 - x1*x4;
+    rels[5] := x4*x2 - x2*x4;
+    rels[6] := x4*x3 - x3*x4;
+#	I:= Ideal( kQ, rels );
+#	gb:= GroebnerBasis( I, rels);
+    A:= kQ/rels ;
+	return [ A, kQ, rels ];
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
