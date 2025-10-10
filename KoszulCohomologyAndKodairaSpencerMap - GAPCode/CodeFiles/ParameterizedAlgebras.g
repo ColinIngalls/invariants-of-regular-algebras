@@ -2016,47 +2016,6 @@ end;
 
 
 
-ParameterizedAlgebraTypeHIICentExt:= function(  )
-local PolyRing, kQ, p, q, Qadj, rels, x1, x2, x3, x4, A, d; 
-Qadj:= CF(Rationals, 4);
-PolyRing:= FunctionField( Qadj, [ "d" ] ) ;
-p:= E(4)*One(PolyRing) ;
-q:= E(4)*One(PolyRing) ;
-d:=   IndeterminatesOfFunctionField( PolyRing )[1] ;
-kQ:= FreeKAlgebra( PolyRing, 4, "x" );
-    rels := [ ];
-    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
-    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
-    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
-    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
-    rels[5] := kQ.x4*kQ.x2 + d*kQ.x2*kQ.x4;
-    rels[6] := kQ.x4*kQ.x3 - q*d*kQ.x3*kQ.x4;
-	A:= GBQuotient( kQ, rels );
-	return [ A, kQ, rels ];
-end;
-
-
-
-ParameterizedAlgebraTypeHIIICentExt:= function(  )
-local PolyRing, kQ, p, Qadj, rels, x1, x2, x3, x4, A, d; 
-Qadj:= CF(Rationals, 4);
-PolyRing:= FunctionField( Qadj, [ "d" ] ) ;
-p:= E(4)*One(PolyRing) ;
-d:=   IndeterminatesOfFunctionField( PolyRing )[1] ;
-kQ:= FreeKAlgebra( PolyRing, 4, "x" );
-    rels := [ ];
-    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
-    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
-    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
-    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
-    rels[5] := kQ.x4*kQ.x2 - d*kQ.x2*kQ.x4;
-    rels[6] := kQ.x4*kQ.x3 + d*kQ.x3*kQ.x4;
-	A:= GBQuotient( kQ, rels );
-	return [ A, kQ, rels ];
-end;
-
-
-
 
 
 ParameterizedAlgebraTypeS1CentExt:= function( K )
