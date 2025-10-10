@@ -1792,7 +1792,7 @@ end;
 
 #Central extensions of three dimensional algebras
 
-AlgebraTypeACentExt:= function(K, a, b, c, alpha1, alpha2, alpha3)     
+AlgebraTypeACentExt:= function(K, a, b, c, alpha1, alpha2, alpha3)    # Same as LeBruynAlgebra above  
 	local kQ, rels, I, gb, A, x1, x2, x3, x4;
     kQ:= FreeKAlgebra(K, 4, "x");
     x1:= kQ.x1; x2:= kQ.x2; x3:= kQ.x3; x4:= kQ.x4;
@@ -1849,7 +1849,7 @@ end;
 
 
 
-AlgebraTypeHICentExt:= function(  )     # where p = zeta4 i.e. primitive 4th root of unity
+AlgebraTypeHCentExt:= function(  )     # where p = zeta4 i.e. primitive 4th root of unity
 	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
 	Qadj:= CF(Rationals, 4);
 	p:= E(4);
@@ -1863,42 +1863,6 @@ AlgebraTypeHICentExt:= function(  )     # where p = zeta4 i.e. primitive 4th roo
     rels[6] := kQ.x4*kQ.x3 - kQ.x3*kQ.x4;
 #	Aa:= GBQuotient( kQ, rels );
 	return [ 0, kQ, rels ];
-end;
-
-
-
-AlgebraTypeHIICentExt:= function( d )     # where p = zeta4 i.e. primitive 4th root of unity
-	local Qadj, kQ, p, q, rels, Aa, x1, x2, x3, x4;
-	Qadj:= CF(Rationals, 4);
-	p:= E(4);
-	q:= E(4); 
-	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
-	rels := [ ];
-    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
-    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
-    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
-    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
-    rels[5] := kQ.x4*kQ.x2 + d*kQ.x2*kQ.x4;
-    rels[6] := kQ.x4*kQ.x3 - q*d*kQ.x3*kQ.x4;
-	Aa:= GBQuotient( kQ, rels );
-	return [ Aa, kQ, rels ];
-end;
-
-
-AlgebraTypeHIIICentExt:= function( d )     # where p = zeta4 i.e. primitive 4th root of unity
-	local Qadj, kQ, p, rels, Aa, x1, x2, x3, x4;
-	Qadj:= CF(Rationals, 4);
-	p:= E(4);
-	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
-	rels := [ ];
-    rels[1] := kQ.x1*kQ.x1 - kQ.x2*kQ.x2;
-    rels[2] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1 + p*kQ.x3*kQ.x3;
-    rels[3] := kQ.x2*kQ.x3 - p*kQ.x3*kQ.x2;
-    rels[4] := kQ.x4*kQ.x1 - d*kQ.x1*kQ.x4;
-    rels[5] := kQ.x4*kQ.x2 - d*kQ.x2*kQ.x4;
-    rels[6] := kQ.x4*kQ.x3 + d*kQ.x3*kQ.x4;
-	Aa:= GBQuotient( kQ, rels );
-	return [ Aa, kQ, rels ];
 end;
 
 
