@@ -380,7 +380,7 @@ end;
 
 ################################################################################################################################################################
 
-Algebra1Generic := function(K, a, b, d, f)             # ae= 1; c= 1 or -1. 
+Algebra1Generic := function(K, a, b, d, f)             # ae= 1; c= 1 or -1. Here, c is assumed to be 1.
     local kQ, rels, x1, x2, x3, x4, I, gb, A ;
     kQ := FreeKAlgebra(K, 4, "x");
     rels := [];
@@ -410,7 +410,7 @@ Algebra2Generic := function(K, c, d, f)               # b= cf; a= b^5/c^4df^4 = 
 end;
 
 
-Algebra3Generic := function(K, a, d, f)              # b=1 or -1; e= 1/a; c= 1/fe^2= a^2/f 
+Algebra3Generic := function(K, a, d, f)              # b=1 or -1; e= 1/a; c= 1/fe^2= a^2/f. Here, b is assumed to be 1.
     local kQ, rels, x1, x2, x3, x4, I, gb, A ;
     kQ := FreeKAlgebra(K, 4, "x");
     rels := [];
@@ -425,7 +425,7 @@ Algebra3Generic := function(K, a, d, f)              # b=1 or -1; e= 1/a; c= 1/f
 end;
 
 
-Algebra4Generic := function(K, a, b, d, e)              # c=1 or -1; f= bd/a 
+Algebra4Generic := function(K, a, b, d, e)              # c=1 or -1; f= bd/a. Here, c is assumed to be 1.
     local kQ, rels, x1, x2, x3, x4, I, gb, A ;
     kQ := FreeKAlgebra(K, 4, "x");
     rels := [];
@@ -455,7 +455,7 @@ Algebra5Generic := function(K, b, d, f)               # c= f/b^2; e= 1/b; a= df^
 end;
 
 
-Algebra6Generic := function(K, a, c, d)                  # e= 1 or -1; f= cd^2; b= de^2= d 
+Algebra6Generic := function(K, a, c, d)                  # e= 1 or -1; f= cd^2; b= de^2= d. Here, e is assumed to be 1.
     local kQ, rels, x1, x2, x3, x4, I, gb, A ;
     kQ := FreeKAlgebra(K, 4, "x");
     rels := [];
