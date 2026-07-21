@@ -1,5 +1,5 @@
 
-ParameterizedAlgebra1Generic := function(K)             # ae= 1; c= 1 or -1. 
+ParameterizedAlgebra1Generic := function(K)             # ae= 1; c= 1 or -1. Here, c is assumed to be 1.
     local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, b, d, f;
     PolyRing:= FunctionField( K, [ "a", "b", "d", "f" ] ) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
@@ -43,7 +43,7 @@ end;
 
 
 
-ParameterizedAlgebra3Generic := function(K)              # b=1 or -1; e= 1/a; c= 1/fe^2= a^2/f 
+ParameterizedAlgebra3Generic := function(K)              # b=1 or -1; e= 1/a; c= 1/fe^2= a^2/f. Here, b is assumed to be 1.
     local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, d, f;
     PolyRing:= FunctionField( K, [ "a", "d", "f" ] ) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
@@ -62,7 +62,7 @@ ParameterizedAlgebra3Generic := function(K)              # b=1 or -1; e= 1/a; c=
 end;
 
 
-ParameterizedAlgebra4Generic := function(K)              # c=1 or -1; f= bd/a 
+ParameterizedAlgebra4Generic := function(K)              # c=1 or -1; f= bd/a. Here, c is assumed to be 1.
     local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, b, d, e;
     PolyRing:= FunctionField( K, [ "a", "b", "d", "e" ] ) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
@@ -102,7 +102,7 @@ ParameterizedAlgebra5Generic := function(K)               # c= f/b^2; e= 1/b; a=
 end;
 
 
-ParameterizedAlgebra6Generic := function(K)                  # e= 1 or -1; f= cd^2; b= de^2= d 
+ParameterizedAlgebra6Generic := function(K)                  # e= 1 or -1; f= cd^2; b= de^2= d. Here, e is assumed to be 1.
     local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, c, d; 
     PolyRing:= FunctionField( K, [ "a", "c", "d" ] ) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
