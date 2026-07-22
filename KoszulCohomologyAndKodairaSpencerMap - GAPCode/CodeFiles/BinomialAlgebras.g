@@ -68,6 +68,11 @@ Algebra5 := function(K)
     return [0, kQ, rels];
 end;
 
+#Note: 
+#In Algebra5 above, if we apply the permutation x1 mapsto x3, x2 mapsto x4, x3 mapsto x1, x4 mapsto x2; we get Algebra KirkmanS. 
+
+
+
 Algebra6 := function(K)
     local kQ, rels, I;
     kQ := FreeKAlgebra(K, 4, "x");
@@ -453,12 +458,6 @@ Algebra5Generic := function(K, b, d, f)               # c= f/b^2; e= 1/b; a= df^
     #A:= kQ/rels ;
     return [0, kQ, rels];
 end;
-
-#Note: 
-#If we set b=d=f=1 in Algebra5 above, and apply the permutation x1 mapsto x3, x2 mapsto x4, x3 mapsto x1, x4 mapsto x2; we get Algebra KirkmanS. 
-
-
-
 
 
 
