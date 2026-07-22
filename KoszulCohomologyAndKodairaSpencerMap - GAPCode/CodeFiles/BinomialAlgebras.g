@@ -454,6 +454,13 @@ Algebra5Generic := function(K, b, d, f)               # c= f/b^2; e= 1/b; a= df^
     return [0, kQ, rels];
 end;
 
+#Note: 
+#If we set b=d=f=1 in Algebra5 above, and apply the permutation x1 mapsto x3, x2 mapsto x4, x3 mapsto x1, x4 mapsto x2; we get Algebra KirkmanS. 
+
+
+
+
+
 
 Algebra6Generic := function(K, a, c, d)                  # e= 1 or -1; f= cd^2; b= de^2= d. Here, e is assumed to be 1.
     local kQ, rels, x1, x2, x3, x4, I, gb, A ;
