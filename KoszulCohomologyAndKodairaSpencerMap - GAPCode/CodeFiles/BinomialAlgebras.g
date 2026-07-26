@@ -539,7 +539,6 @@ end;
 
 
 
-
 Algebra11Generic := function(a, d, e, f)          # b = a*p^2 and c = a*p, where p^3 = 1. 
     local Qadj, kQ, p, rels, A, x1, x2, x3, x4;
     Qadj := CF(Rationals, 3);
@@ -559,7 +558,7 @@ end;
 
 
 
-Algebra12Generic := function(d)          #a = 1, b = e, c = 1, f = -1, where e^2 = -1
+Algebra12Generic := function(d)                  #a = 1, b = e, c = 1, f = -1, where e^2 = -1
     local kQ, e, rels, A, x1, x2, x3, x4;
     kQ := FreeKAlgebraNoGeneratorNames(GaussianRationals, 4, "x");
     e := E(4);
