@@ -385,19 +385,23 @@ end;
 
 ################################################################################################################################################################
 
-Algebra1Generic := function(K, a, b, d, f)             # ae= 1; c= 1 or -1. Here, c is assumed to be 1.
-    local kQ, rels, x1, x2, x3, x4, I, gb, A ;
-    kQ := FreeKAlgebra(K, 4, "x");
+Algebra1Generic := function(a, d, f)             # ae= 1 
+    local Qadj, kQ, rels, x1, x2, x3, x4, I, gb, A, b, c;
+    Qadj:= CF(Rationals, 2);
+	b:= E(2);
+    c:= E(2); 
+	kQ:= FreeKAlgebraNoGeneratorNames( Qadj, 4, "x" );
     rels := [];
     rels[1] := kQ.x1*kQ.x2 - a*kQ.x2*kQ.x1;
     rels[2] := kQ.x1*kQ.x3 - b*kQ.x3*kQ.x4;
-    rels[3] := kQ.x1*kQ.x4 - kQ.x4*kQ.x1;
+    rels[3] := kQ.x1*kQ.x4 - c*kQ.x4*kQ.x1;
     rels[4] := kQ.x2*kQ.x3 - d*kQ.x3*kQ.x2;
     rels[5] := kQ.x2*kQ.x4 - (1/a)*kQ.x4*kQ.x2;
     rels[6] := kQ.x3*kQ.x1 - f*kQ.x4*kQ.x3;
-    #A:= kQ/rels ;
+#    A:= GBQuotient( kQ, rels );
     return [0, kQ, rels];
 end;
+
 
     
 Algebra2Generic := function(K, c, d, f)               # b= cf; a= b^5/c^4df^4 = cf/d; e= c^2df/b^2= d/f 
