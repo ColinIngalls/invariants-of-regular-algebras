@@ -1,24 +1,25 @@
 
-ParameterizedAlgebra1Generic := function(K)             # ae= 1; c= 1 or -1. Here, c is assumed to be 1.
-    local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, b, d, f;
-    PolyRing:= FunctionField( K, [ "a", "b", "d", "f" ] ) ;
+ParameterizedAlgebra1Generic := function( )             # ae= 1
+    local PolyRing, kQ, b, c, Qadj, rels, x1, x2, x3, x4, I, gb, A, a, d, f;
+    Qadj:= CF(Rationals, 2);
+    PolyRing:= FunctionField( Qadj, [ "a", "d", "f" ] ) ;
+    b:= E(2)*One(PolyRing) ;
+    c:= E(2)*One(PolyRing) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
-    b:= IndeterminatesOfFunctionField( PolyRing )[2] ;
-    d:= IndeterminatesOfFunctionField( PolyRing )[3] ;
-    f:=  IndeterminatesOfFunctionField( PolyRing )[4] ;
+    d:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+    f:=  IndeterminatesOfFunctionField( PolyRing )[3] ;
     kQ:= FreeKAlgebra( PolyRing, 4, "x" );
     rels := [];
     rels[1] := kQ.x1*kQ.x2 - a*kQ.x2*kQ.x1;
     rels[2] := kQ.x1*kQ.x3 - b*kQ.x3*kQ.x4;
-    rels[3] := kQ.x1*kQ.x4 - kQ.x4*kQ.x1;
+    rels[3] := kQ.x1*kQ.x4 - c*kQ.x4*kQ.x1;
     rels[4] := kQ.x2*kQ.x3 - d*kQ.x3*kQ.x2;
     rels[5] := kQ.x2*kQ.x4 - (1/a)*kQ.x4*kQ.x2;
     rels[6] := kQ.x3*kQ.x1 - f*kQ.x4*kQ.x3;
-#	I:= Ideal( kQ, rels );
-#	gb:= GroebnerBasis( I, rels );
-#	A:= kQ/rels ;
-	return [ 0, kQ, rels ];
+    #A:= GBQuotient( kQ, rels );
+    return [0, kQ, rels];
 end;
+
 
 
 ParameterizedAlgebra2Generic := function(K)               # b= cf; a= b^5/c^4df^4 = cf/d; e= c^2df/b^2= d/f 
