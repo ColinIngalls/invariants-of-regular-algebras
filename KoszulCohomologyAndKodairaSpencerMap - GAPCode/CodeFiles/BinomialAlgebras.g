@@ -419,12 +419,13 @@ Algebra2Generic := function(K, c, d, f)               # b= cf; a= b^5/c^4df^4 = 
 end;
 
 
-Algebra3Generic := function(K, a, d, f)              # b=1 or -1; e= 1/a; c= 1/fe^2= a^2/f. Here, b is assumed to be 1.
+
+Algebra3Generic := function(K, a, d, f)              # ae= 1; c= 1/fe^2= a^2/f.
     local kQ, rels, x1, x2, x3, x4, I, gb, A ;
     kQ := FreeKAlgebra(K, 4, "x");
     rels := [];
     rels[1] := kQ.x1*kQ.x2 - a*kQ.x2*kQ.x1;
-    rels[2] := kQ.x1*kQ.x3 - kQ.x3*kQ.x1;
+    rels[2] := kQ.x1*kQ.x3 + kQ.x3*kQ.x1;
     rels[3] := kQ.x1*kQ.x4 - (a^2/f)*kQ.x4*kQ.x3;
     rels[4] := kQ.x2*kQ.x2 - d*kQ.x4*kQ.x4;
     rels[5] := kQ.x2*kQ.x3 - (1/a)*kQ.x3*kQ.x2;
@@ -432,6 +433,7 @@ Algebra3Generic := function(K, a, d, f)              # b=1 or -1; e= 1/a; c= 1/f
     #A:= kQ/rels ;
     return [0, kQ, rels];
 end;
+
 
 
 Algebra4Generic := function(K, a, b, d, e)              # c=1 or -1; f= bd/a. Here, c is assumed to be 1.
