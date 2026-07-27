@@ -44,7 +44,7 @@ end;
 
 
 
-ParameterizedAlgebra3Generic := function(K)              # b=1 or -1; e= 1/a; c= 1/fe^2= a^2/f. Here, b is assumed to be 1.
+ParameterizedAlgebra3Generic := function(K)              # ae= 1; c= 1/fe^2= a^2/f.
     local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, d, f;
     PolyRing:= FunctionField( K, [ "a", "d", "f" ] ) ;
     a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
@@ -53,7 +53,7 @@ ParameterizedAlgebra3Generic := function(K)              # b=1 or -1; e= 1/a; c=
     kQ:= FreeKAlgebra( PolyRing, 4, "x" );
     rels := [];
     rels[1] := kQ.x1*kQ.x2 - a*kQ.x2*kQ.x1;
-    rels[2] := kQ.x1*kQ.x3 - kQ.x3*kQ.x1;
+    rels[2] := kQ.x1*kQ.x3 + kQ.x3*kQ.x1;
     rels[3] := kQ.x1*kQ.x4 - (a^2/f)*kQ.x4*kQ.x3;
     rels[4] := kQ.x2*kQ.x2 - d*kQ.x4*kQ.x4;
     rels[5] := kQ.x2*kQ.x3 - (1/a)*kQ.x3*kQ.x2;
@@ -61,6 +61,7 @@ ParameterizedAlgebra3Generic := function(K)              # b=1 or -1; e= 1/a; c=
     #A:= kQ/rels ;
     return [0, kQ, rels];
 end;
+
 
 
 ParameterizedAlgebra4Generic := function(K)              # c=1 or -1; f= bd/a. Here, c is assumed to be 1.
