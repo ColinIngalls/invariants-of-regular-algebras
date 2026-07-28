@@ -249,15 +249,14 @@ end;
 
 
 ParameterizedAlgebra13Generic := function(K)           # a = 1 or -1; d = b*e/c; f = b/c
-    local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, a, b, c, e;
-    PolyRing:= FunctionField( K, [ "a", "b", "c", "e" ] ) ;
-    a:= IndeterminatesOfFunctionField( PolyRing )[1] ;
-    b:= IndeterminatesOfFunctionField( PolyRing )[2] ;
-    c:= IndeterminatesOfFunctionField( PolyRing )[3] ;
-    e:= IndeterminatesOfFunctionField( PolyRing )[4] ;
+    local PolyRing, kQ, rels, x1, x2, x3, x4, I, gb, A, b, c, e;
+    PolyRing:= FunctionField( K, [ "b", "c", "e" ] ) ;
+    b:= IndeterminatesOfFunctionField( PolyRing )[1] ;
+    c:= IndeterminatesOfFunctionField( PolyRing )[2] ;
+    e:= IndeterminatesOfFunctionField( PolyRing )[3] ;
     kQ:= FreeKAlgebra( PolyRing, 4, "x" );
     rels := [];
-    rels[1] := kQ.x1*kQ.x2 - a*kQ.x2*kQ.x1;
+    rels[1] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1;
     rels[2] := kQ.x1*kQ.x3 - b*kQ.x4*kQ.x2;
     rels[3] := kQ.x1*kQ.x4 - c*kQ.x3*kQ.x2;
     rels[4] := kQ.x2*kQ.x3 - ((b*e)/c)*kQ.x4*kQ.x1;
