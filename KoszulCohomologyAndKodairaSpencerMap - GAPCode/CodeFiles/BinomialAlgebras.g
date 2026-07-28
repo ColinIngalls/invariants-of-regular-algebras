@@ -582,11 +582,11 @@ end;
 
 
 
-Algebra13Generic := function(K, a, b, c, e)        # a = 1 or -1; d = b*e/c; f = b/c
+Algebra13Generic := function(K, b, c, e)        # a = 1 or -1; d = b*e/c; f = b/c
     local kQ, rels, x1, x2, x3, x4, I, gb, A;
     kQ := FreeKAlgebra(K, 4, "x");
     rels := [];
-    rels[1] := kQ.x1*kQ.x2 - a*kQ.x2*kQ.x1;
+    rels[1] := kQ.x1*kQ.x2 - kQ.x2*kQ.x1;
     rels[2] := kQ.x1*kQ.x3 - b*kQ.x4*kQ.x2;
     rels[3] := kQ.x1*kQ.x4 - c*kQ.x3*kQ.x2;
     rels[4] := kQ.x2*kQ.x3 - ((b*e)/c)*kQ.x4*kQ.x1;
